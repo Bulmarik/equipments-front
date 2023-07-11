@@ -2,19 +2,16 @@
 <div class="reportList">
   <div class="reportItems" v-for="item in chars" :key="item.id">
     <div class="reportItem">
-      <h3 class="guildmember">{{ item.name }}</h3>
-      <div class="guildmemberStore">
-        <!-- <div class="guildmemberChars" v-for="item in guildmemberChars" :key="item.id">
-          <p class="guildmemberCharRelict">{{ item.relict }}р</p>
-          <p class="guildmemberCharName">{{ item.name }}</p>
-        </div> -->
-
-        // Разобрались, нет, вроде? ветка dev
-        <div class="guildmemberChars" v-for="char in item.chars" :key="char.id">
-          <p class="guildmemberCharRelict">{{ char.relict }}р</p>
-          <p class="guildmemberCharName">| {{ char.name }}</p>
+      <h3 class="char">{{ item.name }}</h3>
+      <div class="guildmembers">
+        <div class="guildmemberName" v-for="member in guildmember" :key="member.id">
+          <div class="guildmemberName" v-for="char in member.chars" :key="char.id">
+            <div class="guildmemberChars" v-if="char.id === item.id">
+              <p class="guildmemberCharRelict">{{ char.relict }}р</p>
+              <p class="guildmemberCharName">| {{ member.name }}</p>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -40,7 +37,13 @@ export default {
   //     selectChars: []
   //   }
   // },
+  mounted () {
+    console.log(this.guildmember)
+  },
   methods: {
+    // qwert () {
+    //   console.log('qwe')
+    // }
     // select (item) {
     //   console.log(item)
     // }

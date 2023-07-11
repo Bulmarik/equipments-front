@@ -1,17 +1,15 @@
 .charList {
   width: 35%;
-  /* border: 1px solid red; */
   background-color: rgb(106, 103, 103);
   display: flex;
   flex-direction: column;
   align-items:flex-start;
-  /* justify-content: center; */
-
 }
 
 .charRel {
   margin: 20px auto;
-  border-bottom: 1px solid rgb(153, 150, 150);;
+  border-bottom: 1px solid rgb(153, 150, 150);
+  font-size: 16px;
 }
 
 .label {
@@ -23,14 +21,13 @@
 }
 
 .charItem {
-  font-size: 24px;
   margin-left: 10px;
 }
 
-.red {
+/* .red {
   color: red;
 }
 
 .green {
   color: green;
-}
+} */

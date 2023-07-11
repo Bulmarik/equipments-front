@@ -10,7 +10,6 @@
   /* border: 1px solid yellow; */
   display: flex;
   flex-direction: column;
-  /* align-items:flex-start; */
 }
 
 .reportItems {
@@ -20,39 +19,62 @@
 
 .reportItem {
   display: flex;
-  /* flex-direction: column; */
   width: 100%;
-  /* border: 1px solid blue; */
 }
 
 .guildmember {
+  width: 40%;
+  font-size: 24px;
+  font-weight: normal;
+  text-align: start;
+  margin: 0;
+  padding-left: 20px;
+  /* border: 1px solid rgb(195, 0, 255); */
+}
+.guildmemberStore {
+  width: 60%;
+  /* width: 250px; */
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid rgb(0, 255, 179); */
+}
+
+.guildmemberChars {
+  width: 100%;
+  display: flex;
+  text-align: start;
+  font-size: 20px;
+}
+
+.guildmemberCharRelict {
+  width: 35px;
+  margin: 0 5px 0 0;
+  text-align: end;
+}
+
+.guildmemberCharName {
+  width: 80%;
+  margin: 0;
+}
+
+.char {
   width: 33%;
   font-size: 24px;
   font-weight: normal;
   text-align: start;
   margin: 0;
   padding-left: 20px;
-    /* border: 1px solid rgb(195, 0, 255); */
-}
-.guildmemberStore {
-    width: 66%;
-  display: flex;
-  flex-direction: column;
-    /* border: 1px solid rgb(0, 255, 179); */
+  /* border: 1px solid rgb(0, 132, 255); */
 }
 
-.guildmemberChars {
-  display: flex;
-  /* width: 66%; */
-  /* border: 1px solid white; */
+.guildmembers {
+  /* width: 66px; */
+  /* display: block; */
+  /* flex-direction: column-reverse; */
+}
+
+.guildmemberName {
+  /* display: flex; */
   text-align: start;
   font-size: 20px;
-}
-
-.guildmemberCharRelict {
-  margin: 0 5px 0 0;
-}
-
-.guildmemberCharName {
-  margin: 0;
 }

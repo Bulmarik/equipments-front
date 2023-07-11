@@ -1,6 +1,5 @@
 <template>
   <div id="app" style="padding: 50px">
-<!--    <img src="./assets/logo.png">-->
     <router-view/>
   </div>
 </template>
@@ -14,12 +13,9 @@ export default {
 <style>
 #app {
   width: 100vw;
-  height: 100vh;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  background-image: url('assets/mainbg.jpg')
+  background-color: rgb(67, 93, 172);
 }
 </style>

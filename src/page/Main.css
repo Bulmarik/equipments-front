@@ -4,3 +4,9 @@
 @import url(../components/CharBar/CharBar.css);
 @import url(../components/Report/Report.css);
 @import url(../components/Footer/Footer.css);
+
+.page {
+  margin: 0;
+  padding: 0;
+  background-color: brown;
+}
