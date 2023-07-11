@@ -1,5 +1,6 @@
 <template>
 <div class="body">
+  {{giInfo}}
   <CharBar
   :chars="chars"
   />
@@ -198,6 +199,9 @@ export default {
     // this.filter()
   },
   computed: {
+    giInfo () {
+      return this.$store.state.sw.giInfo
+    }
   },
   methods: {
     // filter () {

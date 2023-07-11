@@ -183,14 +183,16 @@ export default {
   //   }
   },
   created () {
-
+    this.fetchGiInfo()
   },
   mounted () {
     this.filter()
   },
-  computed: {
-  },
+
   methods: {
+    fetchGiInfo () {
+      this.$store.dispatch('giInfo')
+    },
     filter () {
     }
   }
