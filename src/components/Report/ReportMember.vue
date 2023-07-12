@@ -1,17 +1,15 @@
 <template>
-<div class="reportList">
-  <div class="reportItems" v-for="member in guildmember" :key="member.id">
-    <div class="reportItem">
-      <h3 class="guildmember">{{ member.name }}</h3>
-      <div class="guildmemberStore">
-        <div class="guildmemberChars" v-for="char in member.chars" :key="char.id">
-          <p class="guildmemberCharRelict">{{ char.relict }}р</p>
-          <p class="guildmemberCharName">| {{ char.name }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<ul class="reportList">
+  <li class="reportItem" v-for="member in guildmember" :key="member.id">
+    <h3 class="reportItemName">{{ member.name }}</h3>
+    <ul class="reportItemInfo">
+      <li class="infoElement" v-for="char in member.chars" :key="char.id">
+        <p class="infoRelic">{{ char.relict }}р</p>
+        <p class="infoName">| {{ char.name }}</p>
+      </li>
+    </ul>
+  </li>
+</ul>
 </template>
 
 <script>

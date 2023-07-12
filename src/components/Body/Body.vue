@@ -1,15 +1,28 @@
 <template>
 <div class="body">
-  {{giInfo}}
-  <CharBar
+  <!-- {{giInfo}} -->
+  <Search
   :chars="chars"
   />
   <div class="report">
-    <h2 class="title">Отчет</h2>
-    <ReportMember
+    <div class="reportHeader">
+      <div class="reportRadiobuttons">
+        <div class="reportRadiobutton">
+          <input type="radio" value="user" v-model="user">
+          <label>по игрокам</label>
+        </div>
+        <div class="reportRadiobutton">
+          <input type="radio" value="char" v-model="char">
+          <label>по персонажам</label>
+        </div>
+      </div>
+      <h2 class="title reportTitle">Отчет</h2>
+      <button class="reportButton">Искать</button>
+    </div>
+    <ReportMember class="reportMember"
     :guildmember="guildmember"
     />
-    <ReportChar
+    <ReportChar class="reportChar"
     :chars="chars"
     :guildmember="guildmember"
     />
@@ -18,14 +31,14 @@
 </template>
 
 <script>
-import CharBar from '../CharBar/CharBar.vue'
+import Search from '../Search/Search.vue'
 import ReportMember from '../Report/ReportMember.vue'
 import ReportChar from '../Report/ReportChar.vue'
 
 export default {
   name: 'Body',
   components: {
-    CharBar,
+    Search,
     ReportMember,
     ReportChar
   },

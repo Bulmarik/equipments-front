@@ -1,12 +1,12 @@
 @import url(../components/Body/Body.css);
 @import url(../components/Header//Header.css);
 @import url(../components/Title/Tilte.css);
-@import url(../components/CharBar/CharBar.css);
+@import url(../components/Search/Search.css);
 @import url(../components/Report/Report.css);
 @import url(../components/Footer/Footer.css);
 
 .page {
   margin: 0;
   padding: 0;
-  background-color: brown;
+  background-color: rgb(41, 68, 142);
 }

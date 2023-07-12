@@ -1,0 +1,37 @@
+.searchList {
+  width: 40%;
+  padding: 0 10px;
+  background-color: rgb(106, 103, 103);
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+}
+
+.searchTitle {
+  margin: 11px auto;
+}
+
+.searchRel {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid rgb(153, 150, 150);
+  border-bottom: 1px solid rgb(153, 150, 150);
+  font-size: 20px;
+}
+
+.searchRelDesc {
+  margin: 0;
+}
+
+.charSelectButton {
+  height: 25px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(153, 150, 150);
+  margin: 10px auto 0;
+  padding: 0 20px;
+}

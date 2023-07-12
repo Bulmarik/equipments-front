@@ -1,21 +1,19 @@
 <template>
-<div class="reportList">
-  <div class="reportItems" v-for="item in chars" :key="item.id">
-    <div class="reportItem">
-      <h3 class="char">{{ item.name }}</h3>
-      <div class="guildmembers">
-        <div class="guildmemberName" v-for="member in guildmember" :key="member.id">
-          <div class="guildmemberName" v-for="char in member.chars" :key="char.id">
-            <div class="guildmemberChars" v-if="char.id === item.id">
-              <p class="guildmemberCharRelict">{{ char.relict }}р</p>
-              <p class="guildmemberCharName">| {{ member.name }}</p>
-            </div>
+<ul class="reportList">
+  <li class="reportItem" v-for="item in chars" :key="item.id">
+    <h3 class="reportItemName">{{ item.name }}</h3>
+    <ul class="reportItemInfo">
+      <li v-for="member in guildmember" :key="member.id">
+        <div v-for="char in member.chars" :key="char.id">
+          <div class="infoElement" v-if="char.id === item.id">
+            <p class="infoRelic">{{ char.relict }}р</p>
+            <p class="infoName">| {{ member.name }}</p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </li>
+    </ul>
+  </li>
+</ul>
 </template>
 
 <script>
@@ -38,7 +36,7 @@ export default {
   //   }
   // },
   mounted () {
-    console.log(this.guildmember)
+    // console.log(this.guildmember)
   },
   methods: {
     // qwert () {

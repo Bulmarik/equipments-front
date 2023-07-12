@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="padding: 50px">
+  <div id="app" style="padding: 35px">
     <router-view/>
   </div>
 </template>
@@ -12,7 +12,7 @@ export default {
 
 <style>
 #app {
-  width: 100vw;
+  /* width: 100vw; */
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
