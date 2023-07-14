@@ -1,12 +1,8 @@
 <template>
-<div class="body" >
-  <!-- {{giInfo}} -->
-  <Search
-  :units="units"
-  @openPopup="openPopup"
-  />
   <div class="report">
+    лист0
     <div class="reportHeader">
+      <!-- {{ units }} -->
       <div class="reportRadiobuttons">
         <div class="reportRadiobutton">
           <!-- <input type="radio" value="us" v-model="us"> -->
@@ -22,29 +18,27 @@
       <h2 class="title reportTitle">Отчет</h2>
       <button class="reportButton">Искать</button>
     </div>
-    <ReportMember class="reportMember"
+    <ReportByUser class="reportMember"
     :guildmember="guildmember"
     />
-    <ReportChar class="reportChar"
+    <ReportByUnit class="reportChar"
     :units="units"
     :guildmember="guildmember"
     />
   </div>
-</div>
 </template>
 
 <script>
-import Search from '../Search/Search.vue'
-import ReportMember from '../Report/ReportMember.vue'
-import ReportChar from '../Report/ReportChar.vue'
+// import Search from '../Search/Search.vue'
+import ReportByUser from '../ReportByUser/ReportByUser.vue'
+import ReportByUnit from '../ReportByUnit/ReportByUnit.vue'
 
 export default {
-  name: 'Body',
+  name: 'Report',
 
   components: {
-    Search,
-    ReportMember,
-    ReportChar
+    ReportByUser,
+    ReportByUnit
   },
 
   props:
@@ -57,29 +51,5 @@ export default {
       {
         type: Array
       }
-  },
-
-  created () {
-  },
-
-  mounted () {
-    // this.filter()
-  },
-
-  computed: {
-    giInfo () {
-      return this.$store.state.sw.giInfo
-    }
-  },
-
-  methods: {
-    openPopup (state) {
-      this.$emit('openPopup', state)
-    }
   }
 }
-</script>
-
-<style scoped>
-
-</style>

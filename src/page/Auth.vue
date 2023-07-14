@@ -5,8 +5,8 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-md-9 col-lg-6 col-xl-5">
             <img style="width: 500px" alt="Sample image"
-                 class="img-fluid"
-                 :src="logo">
+                class="img-fluid"
+                :src="logo">
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form @submit.prevent="auth">
@@ -14,15 +14,15 @@
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <input id="em" v-model="email" class="form-control form-control-lg"
-                       placeholder="Enter a valid email address"
-                       type="email"/>
+                      placeholder="Enter a valid email address"
+                      type="email"/>
                 <label class=" float-start form-label text-black" for="em">Email address</label>
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-3">
                 <input id="pass" v-model="password" class="form-control form-control-lg" placeholder="Enter password"
-                       type="password"/>
+                      type="password"/>
                 <label class="float-start form-label text-black" for="pass">Password</label>
               </div>
 

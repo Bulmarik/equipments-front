@@ -1,5 +1,6 @@
 <template>
-<ul class="reportList">
+<ul class="reportList">лист1
+  <!-- {{ guildmember }} -->
   <li class="reportItem" v-for="member in guildmember" :key="member.id">
     <h3 class="reportItemName">{{ member.name }}</h3>
     <ul class="reportItemInfo">
@@ -14,16 +15,21 @@
 
 <script>
 export default {
-  name: 'ReportMember',
+  name: 'ReportByUser',
+
   props:
   {
     guildmember:
       {
         type: Array
+      },
+    units:
+      {
+        type: Array
       }
   },
+
   methods: {
   }
-
 }
 </script>

@@ -1,51 +1,52 @@
 <template>
 <div class="searchList">
   <h2 class="title searchTitle">Запрос</h2>
+  <!-- {{ units }} -->
   <div class="searchRel">
     <p class="searchRelDesc">наименьший уровень реликта</p>
     <div>
-      <input type="radio" value="1" v-model="user">
+      <!-- <input type="radio" value="1" v-model="us"> -->
+      <input type="radio">
       <label>1</label>
     </div>
     <div>
-      <input type="radio" value="2" v-model="user">
+      <input type="radio">
       <label>2</label>
     </div>
     <div>
-      <input type="radio" value="3" v-model="user">
+      <input type="radio">
       <label>3</label>
     </div>
     <div>
-      <input type="radio" value="4" v-model="user">
+      <input type="radio">
       <label>4</label>
     </div>
     <div>
-      <input type="radio" value="5" v-model="user">
+      <input type="radio">
       <label>5</label>
     </div>
     <div>
-      <input type="radio" value="6" v-model="user">
+      <input type="radio">
       <label>6</label>
     </div>
     <div>
-      <input type="radio" value="7" v-model="user">
+      <input type="radio">
       <label>7</label>
     </div>
     <div>
-      <input type="radio" value="8" v-model="user">
+      <input type="radio">
       <label>8</label>
     </div>
     <div>
-      <input type="radio" value="9" v-model="user">
+      <input type="radio">
       <label>9</label>
     </div>
   </div>
-  <button class="charSelectButton">полный список доступных персонажей</button>
-  <div class="searchChar" v-for="char in chars" :key="char.id">
+  <button class="charSelectButton" @click="popupOpen">полный список доступных персонажей</button>
+  <div class="searchChar" v-for="unit in units" :key="unit.id">
     <div>
-      <input @input="select(char.id)" type="checkbox" :id="'checkbox_' + char.id" />
-      <label>{{ char.name }}</label>
-      <!-- <label :class="addClass(item.id)" :for="'checkbox_' + item.id">{{ item.name }}</label> -->
+      <input @input="select(unit.id)" type="checkbox" :id="'checkbox_' + unit.id" />
+      <label>{{ unit.name }}</label>
     </div>
   </div>
 </div>
@@ -54,30 +55,28 @@
 <script>
 export default {
   name: 'Search',
+
   props:
   {
-    chars:
+    units:
       {
         type: Array
       }
   },
+
   data () {
     return {
       selectChars: []
     }
   },
+
   methods: {
     select (item) {
       console.log(item)
+    },
+    popupOpen () {
+      this.$emit('openPopup', 'visible')
     }
-    // addClass (value) {
-    //   if (value > 1) {
-    //     return 'red'
-    //   } else {
-    //     return 'green'
-    //   }
-    // }
   }
-
 }
 </script>

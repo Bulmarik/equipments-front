@@ -4,9 +4,11 @@
 @import url(../components/Search/Search.css);
 @import url(../components/Report/Report.css);
 @import url(../components/Footer/Footer.css);
+@import url(../components/Popup/Popup.css);
 
 .page {
   margin: 0;
   padding: 0;
   background-color: rgb(41, 68, 142);
+  position: relative;
 }

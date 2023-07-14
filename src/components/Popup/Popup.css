@@ -1,0 +1,45 @@
+.popupGrid {
+  width: 100%;
+  /* min-height: 100vh; */
+  background-color: rgb(88, 124, 197);
+  display: none;
+  gap: 5px;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(3, min-content);
+  /* border: 1 solid red; */
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* right: -15px; */
+}
+
+.popupCloseBtn {
+  width: 30px;
+  height: 30px;
+  background-color: crimson;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  border: none;
+  border-radius: 5px;
+}
+
+.popupGridItem {
+  background-color: rgb(85, 90, 114);
+  /* border: 1 solid red; */
+  display: flex;
+  align-items: center;
+}
+
+.popupGridCheckbox {
+  margin-right: 3px;
+}
+
+.popupOpen {
+  display: grid;
+}
+
+.popupClose {
+  display: none;
+}

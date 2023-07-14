@@ -1,6 +1,6 @@
 <template>
-<ul class="reportList">
-  <li class="reportItem" v-for="item in chars" :key="item.id">
+<ul class="reportList">лист1
+  <li class="reportItem" v-for="item in units" :key="item.id">
     <h3 class="reportItemName">{{ item.name }}</h3>
     <ul class="reportItemInfo">
       <li v-for="member in guildmember" :key="member.id">
@@ -18,26 +18,24 @@
 
 <script>
 export default {
-  name: 'ReportChar',
+  name: 'ReportByUnit',
+
   props:
   {
     guildmember:
       {
         type: Array
       },
-    chars:
+    units:
       {
         type: Array
       }
   },
-  // data () {
-  //   return {
-  //     selectChars: []
-  //   }
-  // },
+
   mounted () {
     // console.log(this.guildmember)
   },
+
   methods: {
     // qwert () {
     //   console.log('qwe')
@@ -53,6 +51,5 @@ export default {
     //   }
     // }
   }
-
 }
 </script>
