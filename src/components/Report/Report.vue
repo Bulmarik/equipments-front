@@ -3,6 +3,8 @@
     лист0
     <div class="reportHeader">
       <!-- {{ units }} -->
+      <!-- {{$store.state.sw.giInfo}} -->
+      <!-- {{$store.state.sw.giAllChars}} -->
       <div class="reportRadiobuttons">
         <div class="reportRadiobutton">
           <!-- <input type="radio" value="us" v-model="us"> -->

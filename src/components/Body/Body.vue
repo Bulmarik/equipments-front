@@ -1,6 +1,6 @@
 <template>
 <div class="body" >
-  <!-- {{giInfo}} -->
+  <!-- {{giAllChars}} -->
   <Search
   :units="units"
   @openPopup="openPopup"
@@ -23,6 +23,7 @@
       <button class="reportButton">Искать</button>
     </div>
     <ReportMember class="reportMember"
+    :units="units"
     :guildmember="guildmember"
     />
     <ReportChar class="reportChar"
@@ -65,10 +66,13 @@ export default {
   mounted () {
     // this.filter()
   },
-
+  // почему компьютед находится в Боди?
   computed: {
     giInfo () {
       return this.$store.state.sw.giInfo
+    },
+    giAllChars () {
+      return this.$store.state.sw.giAllChars
     }
   },
 

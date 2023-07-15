@@ -9,7 +9,6 @@
   />
   <Footer/>
   <Popup
-  :allChars="allChars"
   @chois="selectChar"
   :popupState="popupState"
   @closePopup="closePopup"
@@ -36,131 +35,125 @@ export default {
 
   data () {
     return {
-      allChars: [
-        {
-          id: 1,
-          name: 'Лорд Вейдер'
-        },
-        {
-          id: 2,
-          name: 'Мастер джедай Кеноби'
-        },
-        {
-          id: 3,
-          name: 'Император вечных ситхов'
-        },
-        {
-          id: 4,
-          name: 'Верховный лидер Кайло Рен'
-        },
-        {
-          id: 5,
-          name: 'Джабба Хатт'
-        },
-        {
-          id: 6,
-          name: 'Генерал Скайуокер'
-        },
-        {
-          id: 7,
-          name: 'Генерал Гривус'
-        },
-        {
-          id: 8,
-          name: 'Командир Асока Тано'
-        },
-        {
-          id: 9,
-          name: 'R2D2'
-        },
-        {
-          id: 10,
-          name: 'Старый контрабандист Хан'
-        },
-        {
-          id: 11,
-          name: 'Чубакка'
-        },
-        {
-          id: 12,
-          name: 'Принцесса Лея'
-        },
-        {
-          id: 13,
-          name: 'Логрей'
-        },
-        {
-          id: 14,
-          name: 'Мара Джейд, рука императора'
-        },
-        {
-          id: 15,
-          name: 'Люк, мальчик с фермы'
-        },
-        {
-          id: 16,
-          name: 'Гамореанский стражник'
-        },
-        {
-          id: 17,
-          name: 'Полицейский нижнего Коррусанта'
-        },
-        {
-          id: 18,
-          name: 'Сан Фак'
-        },
-        {
-          id: 19,
-          name: 'Штурмовик империи ситхов'
-        },
-        {
-          id: 20,
-          name: 'Боба Фет, потомок Джанго'
-        },
-        {
-          id: 21,
-          name: 'Биггс Даркдайтер'
-        }
-      ],
+      // allChars: [
+      //   {
+      //     id: 1,
+      //     name: 'Лорд Вейдер'
+      //   },
+      //   {
+      //     id: 2,
+      //     name: 'Мастер джедай Кеноби'
+      //   },
+      //   {
+      //     id: 3,
+      //     name: 'Император вечных ситхов'
+      //   },
+      //   {
+      //     id: 4,
+      //     name: 'Верховный лидер Кайло Рен'
+      //   },
+      //   {
+      //     id: 5,
+      //     name: 'Джабба Хатт'
+      //   },
+      //   {
+      //     id: 6,
+      //     name: 'Генерал Скайуокер'
+      //   },
+      //   {
+      //     id: 7,
+      //     name: 'Генерал Гривус'
+      //   },
+      //   {
+      //     id: 8,
+      //     name: 'Командир Асока Тано'
+      //   },
+      //   {
+      //     id: 9,
+      //     name: 'R2D2'
+      //   },
+      //   {
+      //     id: 10,
+      //     name: 'Старый контрабандист Хан'
+      //   },
+      //   {
+      //     id: 11,
+      //     name: 'Чубакка'
+      //   },
+      //   {
+      //     id: 12,
+      //     name: 'Принцесса Лея'
+      //   },
+      //   {
+      //     id: 13,
+      //     name: 'Логрей'
+      //   },
+      //   {
+      //     id: 14,
+      //     name: 'Мара Джейд, рука императора'
+      //   },
+      //   {
+      //     id: 15,
+      //     name: 'Люк, мальчик с фермы'
+      //   },
+      //   {
+      //     id: 16,
+      //     name: 'Гамореанский стражник'
+      //   },
+      //   {
+      //     id: 17,
+      //     name: 'Полицейский нижнего Коррусанта'
+      //   },
+      //   {
+      //     id: 18,
+      //     name: 'Сан Фак'
+      //   },
+      //   {
+      //     id: 19,
+      //     name: 'Штурмовик империи ситхов'
+      //   },
+      //   {
+      //     id: 20,
+      //     name: 'Боба Фет, потомок Джанго'
+      //   },
+      //   {
+      //     id: 21,
+      //     name: 'Биггс Даркдайтер'
+      //   }
+      // ],
       guildmember: [
         {
           id: 1,
           name: 'Марат',
-          // relict: 25,
           chars: [
             {
-              id: 1,
-              name: 'Лорд Вейдер',
+              id: 'TRIPLEZERO',
+              name: '0-0-0',
               relict: 25
             },
             {
-              id: 9,
-              name: 'R2D2',
+              id: 'AMILYNHOLDO',
+              name: 'Эмилин холдо',
               relict: 6
             },
             {
-              id: 2,
-              name: 'Мастер джедай Кеноби',
+              id: 'ARCTROOPER501ST',
+              name: 'ЭРК-штурмовик',
               relict: 7
             },
             {
-              id: 3,
-              name: 'Император вечных ситхов',
-              relict: 6
-            },
-            {
-              id: 6,
-              name: 'Генерал Скайуокер',
+              id: 'BB8',
+              name: 'BB8',
               relict: 0
             },
             {
-              id: 7,
-              name: 'Генерал Гривус',
+              id: 'BOSSK',
+              name: 'Босск',
               relict: 7
             },
             {
-              id: 4,
-              name: 'Верховный лидер Кайло Рен',
+              id: 'DARTHSIDIOUS',
+              name: 'Дарт Сидиус',
               relict: 4
             }
           ]
@@ -168,31 +161,25 @@ export default {
         {
           id: 2,
           name: 'Петя',
-          // relict: 15,
           chars: [
             {
-              id: 6,
-              name: 'Генерал Скайуокер',
-              relict: 0
+              id: 'TRIPLEZERO',
+              name: '0-0-0',
+              relict: 6
             },
             {
-              id: 8,
-              name: 'Командир Асока Тано',
-              relict: 0
+              id: 'AMILYNHOLDO',
+              name: 'Эмилин холдо',
+              relict: 5
             },
             {
-              id: 7,
-              name: 'Генерал Гривус',
-              relict: 7
+              id: 'ARCTROOPER501ST',
+              name: 'ЭРК-штурмовик',
+              relict: 4
             },
             {
-              id: 9,
-              name: 'R2D2',
-              relict: 1
-            },
-            {
-              id: 11,
-              name: 'Чубакка',
+              id: 'BAZEMALBUS',
+              name: 'Бэйз Мальбус',
               relict: 3
             }
           ]
@@ -200,37 +187,26 @@ export default {
         {
           id: 3,
           name: 'Руслан',
-          // relict: 5,
           chars: [
             {
-              id: 5,
-              name: 'Джабба Хатт',
-              relict: 7
-            },
-            {
-              id: 4,
-              name: 'Верховный лидер Кайло Рен',
-              relict: 5
-            },
-            {
-              id: 9,
-              name: 'R2D2',
+              id: 'BAZEMALBUS',
+              name: 'Бэйз Мальбус',
               relict: 4
             },
             {
-              id: 10,
-              name: 'Старый контрабандист Хан',
+              id: 'BB8',
+              name: 'BB8',
               relict: 3
             },
             {
-              id: 8,
-              name: 'Командир Асока Тано',
-              relict: 5
+              id: 'BOSSK',
+              name: 'Босск',
+              relict: 2
             },
             {
-              id: 11,
-              name: 'Чубакка',
-              relict: 6
+              id: 'DARTHSIDIOUS',
+              name: 'Дарт Сидиус',
+              relict: 1
             }
           ]
         }
@@ -240,7 +216,8 @@ export default {
     }
   },
   created () {
-    this.fetchGiInfo()
+    // this.fetchGiInfo()
+    this.fetchGiAllChars()
   },
   mounted () {
     this.filter()
@@ -249,6 +226,9 @@ export default {
   methods: {
     fetchGiInfo () {
       this.$store.dispatch('giInfo')
+    },
+    fetchGiAllChars () {
+      this.$store.dispatch('giAllChars')
     },
     filter () {
     },
