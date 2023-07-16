@@ -2,14 +2,22 @@
 <ul class="reportList">лист-5
   <!-- {{ units }} -->
   <!-- {{ giAllChars }} -->
-  <div v-for="member in guildmember" :key="member.id">
-    <div v-for="char in member.chars" :key="char.id">
-      <div v-for="unit in units" :key="unit.id">
-        <div v-if="char.id === unit.id">
-          <p class="infoRelic">{{ char.relict }}р</p>
-          <p class="infoName">| {{ member.name }}</p>
-        </div>
-      </div>
+<!--  <div v-for="member in guildmember" :key="member.id">-->
+<!--    <div v-for="char in member.chars" :key="char.id">-->
+<!--      <div v-for="unit in units" :key="unit.id">-->
+<!--        <div v-if="char.id === unit.id">-->
+<!--          <p class="infoRelic">{{ char.relict }}р</p>-->
+<!--          <p class="infoName">| {{ member.name }}</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="border border-dark mb-1 p-2" v-for="member in guildmembers" :key="member.id">
+    <h3 class="text-black">{{member.name}}</h3>
+    <div  v-for="unit in member.units" :key="member.id + '_' + unit.external_id">
+      <span class="infoRelic">{{ unit.rel }}р</span>
+      <span class="infoName">| {{ unit.name }}</span>
     </div>
   </div>
 
@@ -30,6 +38,12 @@ export default {
       {
         type: Array
       }
+  },
+
+  computed: {
+    guildmembers () {
+      return this.$store.state.sw.resultSearch
+    }
   },
 
   methods: {

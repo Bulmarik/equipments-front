@@ -20,7 +20,11 @@
         </div>
       </div>
       <h2 class="title reportTitle">Отчет</h2>
-      <button class="reportButton">Искать</button>
+      <div class="reportRadiobuttons">
+        <button @click.prevent="search" class="btn bg-secondary">Искать</button>
+        <button style="margin-left: 10px" @click.prevent="reset" class="btn bg-danger">Сброс</button>
+      </div>
+
     </div>
     <ReportMember class="reportMember"
     :units="units"
@@ -77,6 +81,12 @@ export default {
   },
 
   methods: {
+    search () {
+      this.$store.dispatch('search')
+    },
+    reset () {
+      this.$store.commit('SET_RESULT_SEARCH', [])
+    },
     openPopup (state) {
       this.$emit('openPopup', state)
     }
