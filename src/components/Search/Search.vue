@@ -4,42 +4,9 @@
   <!-- {{ units }} -->
   <div class="searchRel">
     <p class="searchRelDesc">наименьший уровень реликта</p>
-    <div>
-      <!-- <input type="radio" value="1" v-model="us"> -->
-      <input type="radio">
-      <label>1</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>2</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>3</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>4</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>5</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>6</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>7</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>8</label>
-    </div>
-    <div>
-      <input type="radio">
-      <label>9</label>
+    <div v-for="rel in 9" :key="rel + Math.random(2)">
+      <input @input="selectRel" name="rel" :id="rel" type="radio" :value="rel">
+      <label :for="rel">{{rel}}</label>
     </div>
   </div>
   <button class="charSelectButton" @click="popupOpen">полный список доступных персонажей</button>
@@ -69,10 +36,12 @@ export default {
       selectChars: []
     }
   },
-
   methods: {
     select (item) {
-      console.log(item)
+      this.$store.commit('SET_PARAM_RESULT_CHARS', item)
+    },
+    selectRel (item) {
+      this.$store.commit('SET_PARAM_RESULT_REL', item.target.value)
     },
     popupOpen () {
       this.$emit('openPopup', 'visible')

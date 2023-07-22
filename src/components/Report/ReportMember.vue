@@ -12,12 +12,11 @@
 <!--      </div>-->
 <!--    </div>-->
 <!--  </div>-->
-
   <div class="border border-dark mb-1 p-2" v-for="member in guildmembers" :key="member.id">
     <h3 class="text-black">{{member.name}}</h3>
-    <div  v-for="unit in member.units" :key="member.id + '_' + unit.external_id">
-      <span class="infoRelic">{{ unit.rel }}р</span>
-      <span class="infoName">| {{ unit.name }}</span>
+    <div  v-for="chars in member.chars" :key="member.id + '_' + chars.external_id">
+      <span class="infoRelic">{{ chars.pivot.rel }}р</span>
+      <span class="infoName">| {{ chars.name }}</span>
     </div>
   </div>
 
