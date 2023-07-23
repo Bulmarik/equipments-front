@@ -1,10 +1,12 @@
 <template>
-  <div class="popupGrid" :class="addClass(popupState)">
+  <div class="popup" :class="addClass(popupState)">
     <!-- {{$store.state.sw.giInfo}} -->
     <button class="popupCloseBtn" @click="popupClose">X</button>
-    <div class="popupGridItem" v-for="char in giAllChars" :key="char.external_id">
-      <input class="popupGridCheckbox" @input="$emit('chois', char)" type="checkbox" :external_id="'checkbox_' + char.id" />
-      <label>{{ char.name }}</label>
+    <div class="popupGrid">
+      <div class="popupGridItem" v-for="char in giAllChars" :key="char.external_id">
+        <input class="popupGridCheckbox" @input="$emit('chois', char)" type="checkbox" :external_id="'checkbox_' + char.id" />
+        <label>{{ char.name }}</label>
+      </div>
     </div>
   </div>
 </template>
@@ -53,7 +55,7 @@ export default {
     },
     popupClose () {
       this.$emit('closePopup', 'invisible')
-      console.log('$store.state.sw.giInfo')
+      // console.log(this.$store.state.sw.giInfo)
     }
   }
 }

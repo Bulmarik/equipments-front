@@ -33,9 +33,9 @@ export default {
     }
   },
   actions: {
-    async search ({commit, state}, params) {
+    async search ({commit, state}) {
       let param = JSON.stringify(state.paramResult)
-      const { data } = await apiClient.post('/search-data?', param)
+      const { data } = await apiClient.post('/search-data', param)
       commit('SET_RESULT_SEARCH', data)
     },
     async giInfo ({
