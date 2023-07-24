@@ -1,11 +1,17 @@
 <template>
   <div class="popup" :class="addClass(popupState)">
-    <!-- {{$store.state.sw.giInfo}} -->
-    <button class="popupCloseBtn" @click="popupClose">X</button>
+    <h2 class="popupTitle">Персонажи</h2>
+    <button class="popupBtn popupBtnReset">Сброс</button>
+    <button class="popupBtn popupBtnOk" @click="popupClose">Ок</button>
     <div class="popupGrid">
-      <div class="popupGridItem" v-for="char in giAllChars" :key="char.external_id">
-        <input class="popupGridCheckbox" @input="$emit('chois', char)" type="checkbox" :external_id="'checkbox_' + char.id" />
-        <label>{{ char.name }}</label>
+      <div class="popupItem" v-for="char in giAllChars" :key="char.id">
+        <label class="popupItemLabel">
+          <div class="popupItemLabelBox">
+            <input class="popupItemCheckbox" @input="$emit('chois', char)" type="checkbox" :id="'checkbox_' + char.id" />
+            {{ char.name_ru }}
+          </div>
+          <img class="popupItemIcon" src="../../images/tex.charui_coruscantpolice.png" alt="иконка перса">
+        </label>
       </div>
     </div>
   </div>
@@ -17,10 +23,6 @@ export default {
 
   props:
   {
-    // allChars:
-    //   {
-    //     type: Array
-    //   },
     popupState:
       {
         type: String
@@ -34,9 +36,6 @@ export default {
   },
 
   computed: {
-    giInfo () {
-      return this.$store.state.sw.giInfo
-    },
     giAllChars () {
       return this.$store.state.sw.giAllChars
     }
