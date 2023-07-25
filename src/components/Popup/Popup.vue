@@ -1,17 +1,31 @@
 <template>
   <div class="popup" :class="addClass(popupState)">
-    <h2 class="popupTitle">Персонажи</h2>
     <button class="popupBtn popupBtnReset">Сброс</button>
     <button class="popupBtn popupBtnOk" @click="popupClose">Ок</button>
-    <div class="popupGrid">
-      <div class="popupItem" v-for="char in giAllChars" :key="char.id">
-        <label class="popupItemLabel">
-          <div class="popupItemLabelBox">
-            <input class="popupItemCheckbox" @input="$emit('chois', char)" type="checkbox" :id="'checkbox_' + char.id" />
-            {{ char.name_ru }}
-          </div>
-          <img class="popupItemIcon" src="../../images/tex.charui_coruscantpolice.png" alt="иконка перса">
-        </label>
+    <div class="popupContent">
+      <h2 class="popupTitle">Персонажи</h2>
+      <div class="popupGrid">
+        <div class="popupItem" v-for="char in giAllChars" :key="char.id">
+          <label class="popupItemLabel">
+            <div class="popupItemLabelBox">
+              <input class="popupItemCheckbox" @input="$emit('chois', char)" type="checkbox" :id="'checkbox_' + char.id" />
+              {{ char.name_ru }}
+            </div>
+            <img class="popupItemIcon" src="../../images/tex.charui_coruscantpolice.png" alt="иконка перса">
+          </label>
+        </div>
+      </div>
+      <h2 class="popupTitle">Корабли</h2>
+      <div class="popupGrid">
+        <div class="popupItem" v-for="char in giAllChars" :key="char.id">
+          <label class="popupItemLabel">
+            <div class="popupItemLabelBox">
+              <input class="popupItemCheckbox" @input="$emit('chois', char)" type="checkbox" :id="'checkbox_' + char.id" />
+              {{ char.name_ru }}
+            </div>
+            <img class="popupItemIcon" src="../../images/tex.charui_coruscantpolice.png" alt="иконка перса">
+          </label>
+        </div>
       </div>
     </div>
   </div>
