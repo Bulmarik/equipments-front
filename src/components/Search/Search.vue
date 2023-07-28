@@ -12,7 +12,7 @@
   <div class="searchChar" v-for="unit in units" :key="unit.id">
     <label>
       <input @input="select(unit.id)" type="checkbox" :id="'checkbox_' + unit.id" />
-      {{ unit.name_ru }}
+      {{ unit.name }}
     </label>
   </div>
 </div>

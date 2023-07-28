@@ -8,14 +8,21 @@ export default {
     paramResult: {
       ids: [],
       rel: null
-    }
+    },
+    searchByChar: []
   },
   mutations: {
     SET_GI_INFO (state, payload) {
       state.giInfo = payload.data
     },
     SET_ALL_CHARS (state, payload) {
-      state.giAllChars = payload.data
+      let charname = payload.data
+      charname.sort((a, b) => {
+        if (a.name_ru < b.name_ru) return -1
+        if (a.name_ru > b.name_ru) return 1
+        return 0
+      })
+      state.giAllChars = charname
     },
     SET_RESULT_SEARCH (state, payload) {
       state.resultSearch = payload.data
@@ -30,9 +37,22 @@ export default {
       } else {
         state.paramResult.ids.push(payload)
       }
+    },
+    SEARCH_BY_CHAR (state, payload) {
+      let charname = payload.data
+      charname.sort((a, b) => {
+        if (a.name_ru < b.name_ru) return -1
+        if (a.name_ru > b.name_ru) return 1
+        return 0
+      })
+      state.searchByChar = charname
     }
   },
   actions: {
+    async searchByChar ({commit}) {
+      const { data } = await apiClient.post('/search-data-by-char')
+      commit('SEARCH_BY_CHAR', data)
+    },
     async search ({commit, state}) {
       let param = JSON.stringify(state.paramResult)
       const { data } = await apiClient.post('/search-data', param)

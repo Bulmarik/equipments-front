@@ -4,7 +4,6 @@
   <!-- {{ units }} -->
   <Body
   :units="units"
-  :guildmember="guildmember"
   @openPopup="openPopup"
   />
   <Footer/>
@@ -12,6 +11,7 @@
   @chois="selectChar"
   :popupState="popupState"
   @closePopup="closePopup"
+  @clearUnitList="clearUnitList"
   />
 </div>
 </template>
@@ -35,96 +35,6 @@ export default {
 
   data () {
     return {
-      guildmember: [
-        {
-          id: 1,
-          name: 'Марат',
-          chars: [
-            {
-              id: 'TRIPLEZERO',
-              name: '0-0-0',
-              relict: 25
-            },
-            {
-              id: 'AMILYNHOLDO',
-              name: 'Эмилин холдо',
-              relict: 6
-            },
-            {
-              id: 'ARCTROOPER501ST',
-              name: 'ЭРК-штурмовик',
-              relict: 7
-            },
-            {
-              id: 'BB8',
-              name: 'BB8',
-              relict: 0
-            },
-            {
-              id: 'BOSSK',
-              name: 'Босск',
-              relict: 7
-            },
-            {
-              id: 'DARTHSIDIOUS',
-              name: 'Дарт Сидиус',
-              relict: 4
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: 'Петя',
-          chars: [
-            {
-              id: 'TRIPLEZERO',
-              name: '0-0-0',
-              relict: 6
-            },
-            {
-              id: 'AMILYNHOLDO',
-              name: 'Эмилин холдо',
-              relict: 5
-            },
-            {
-              id: 'ARCTROOPER501ST',
-              name: 'ЭРК-штурмовик',
-              relict: 4
-            },
-            {
-              id: 'BAZEMALBUS',
-              name: 'Бэйз Мальбус',
-              relict: 3
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: 'Руслан',
-          chars: [
-            {
-              id: 'BAZEMALBUS',
-              name: 'Бэйз Мальбус',
-              relict: 4
-            },
-            {
-              id: 'BB8',
-              name: 'BB8',
-              relict: 3
-            },
-            {
-              id: 'BOSSK',
-              name: 'Босск',
-              relict: 2
-            },
-            {
-              id: 'DARTHSIDIOUS',
-              name: 'Дарт Сидиус',
-              relict: 1
-            }
-          ]
-        }
-      ],
       units: [],
       popupState: 'invisible'
     }
@@ -134,7 +44,7 @@ export default {
     this.fetchGiAllChars()
   },
   mounted () {
-    this.filter()
+    this.filter() // Зачем он?
   },
 
   methods: {
@@ -154,6 +64,10 @@ export default {
       } else {
         this.units.push(item)
       }
+    },
+
+    clearUnitList () {
+      this.units = []
     },
 
     openPopup (state) {

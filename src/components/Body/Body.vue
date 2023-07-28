@@ -10,12 +10,12 @@
       <div class="reportRadiobuttons">
         <div class="reportRadiobutton">
           <!-- <input type="radio" value="us" v-model="us"> -->
-          <input type="radio">
+          <input type="radio" @input="search('member')" name="searchByMember" value="member" v-model="stateSearch">
           <label>по игрокам</label>
         </div>
         <div class="reportRadiobutton">
           <!-- <input type="radio" value="char" v-model="char"> -->
-          <input type="radio">
+          <input type="radio" @input="search('char')" name="searchByChar" value="char" v-model="stateSearch">
           <label>по персонажам</label>
         </div>
       </div>
@@ -24,15 +24,11 @@
         <button @click.prevent="search" class="btn bg-secondary">Искать</button>
         <button style="margin-left: 10px" @click.prevent="reset" class="btn bg-danger">Сброс</button>
       </div>
-
     </div>
     <ReportMember class="reportMember"
-    :units="units"
-    :guildmember="guildmember"
     />
     <ReportChar class="reportChar"
     :units="units"
-    :guildmember="guildmember"
     />
   </div>
 </div>
@@ -45,6 +41,12 @@ import ReportChar from '../Report/ReportChar.vue'
 
 export default {
   name: 'Body',
+
+  data () {
+    return {
+      stateSearch: null
+    }
+  },
 
   components: {
     Search,
@@ -81,8 +83,14 @@ export default {
   },
 
   methods: {
-    search () {
-      this.$store.dispatch('search')
+    search (e) {
+      if (e === 'member') {
+        this.$store.dispatch('search')
+      }
+      if (e === 'char') {
+        this.$store.dispatch('searchByChar')
+      }
+      console.log(e)
     },
     reset () {
       this.$store.commit('SET_RESULT_SEARCH', [])

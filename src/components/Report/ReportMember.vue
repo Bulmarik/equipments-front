@@ -1,7 +1,5 @@
 <template>
-<ul class="reportList">лист-5
-  <!-- {{ units }} -->
-  <!-- {{ giAllChars }} -->
+<ul class="reportList">
 <!--  <div v-for="member in guildmember" :key="member.id">-->
 <!--    <div v-for="char in member.chars" :key="char.id">-->
 <!--      <div v-for="unit in units" :key="unit.id">-->
@@ -29,14 +27,14 @@ export default {
 
   props:
   {
-    guildmember:
-      {
-        type: Array
-      },
-    units:
-      {
-        type: Array
-      }
+    // guildmember:
+    //   {
+    //     type: Array
+    //   },
+    // units:
+    //   {
+    //     type: Array
+    //   }
   },
 
   computed: {

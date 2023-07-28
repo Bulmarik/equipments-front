@@ -1,6 +1,8 @@
 <template>
 <ul class="reportList">
-  <!-- {{ guildmember }} -->
+  <!-- {{ guildmembers }}
+  {{ chars }} -->
+  <!-- {{ searchByChar }} -->
   <!-- {{ units }} -->
 <!--  <li class="reportItem" v-for="unit in units" :key="unit.external_id">-->
 <!--    <h3 class="reportItemName">{{ unit.name }}</h3>-->
@@ -16,41 +18,68 @@
 <!--      </li>-->
 <!--    </ul>-->
 <!--  </li>-->
+
+  <li class="reportItem" v-for="unit in searchByChar" :key="unit.id">
+    <h3 class="reportItemName">{{ unit.name }}</h3>
+    <ul class="reportItemInfo">
+      <!-- <li v-for="member in unit.member" :key="member.id"> -->
+      <!-- {{ member.name }} -->
+      <div v-for="member in unit.members" :key="member.id">
+        <!-- <div class="infoElement" v-if="char.id === unit.external_id"> -->
+        <div class="infoElement">
+          <p class="infoRelic">{{ member.pivot.rel }}р</p>
+          <p class="infoName">| {{ member.name }}</p>
+
+        </div>
+      </div>
+      <!-- </li> -->
+    </ul>
+  </li>
+
 </ul>
 </template>
 
 <script>
 export default {
-  name: 'ReportByUnit',
+  name: 'ReportChar',
 
   props:
   {
     units:
       {
         type: Array
-      },
-    guildmember:
-      {
-        type: Array
       }
+    // guildmember:
+    //   {
+    //     type: Array
+    //   }
   },
 
   computed: {
     guildmembers () {
       return this.$store.state.sw.resultSearch
+    },
+    chars () {
+      return this.$store.state.sw.searchByChar
+    },
+    searchByChar () {
+      return this.$store.state.sw.searchByChar
     }
   },
   mounted () {
-    // console.log(this.guildmember)
+    this.$store.dispatch('searchByChar')
   },
 
   // computed: {
-  //   giInfo () {
-  //     return this.$store.state.sw.giInfo
-  //   },
-  //   giAllChars () {
-  //     return this.$store.state.sw.giAllChars
+  //   searchByChar () {
+  //     return this.$store.state.sw.searchByChar
   //   }
+  // giInfo () {
+  //   return this.$store.state.sw.giInfo
+  // },
+  // giAllChars () {
+  //   return this.$store.state.sw.giAllChars
+  // }
   // },
 
   methods: {
