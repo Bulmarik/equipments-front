@@ -90,7 +90,7 @@ export default {
       if (e === 'char') {
         this.$store.dispatch('searchByChar')
       }
-      console.log(e)
+      // console.log(e)
     },
     reset () {
       this.$store.commit('SET_RESULT_SEARCH', [])

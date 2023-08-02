@@ -19,17 +19,16 @@
 <!--    </ul>-->
 <!--  </li>-->
 
-  <li class="reportItem" v-for="unit in searchByChar" :key="unit.id">
-    {{ Жопа }}
-    <h3 class="reportItemName">{{ unit.name }}</h3>
+  <li class="reportItem" v-for="item in searchByChar" :key="item.id">
+    <h3 class="reportItemName">{{ item.name }}</h3>
     <ul class="reportItemInfo">
       <!-- <li v-for="member in unit.member" :key="member.id"> -->
       <!-- {{ member.name }} -->
-      <div v-for="member in unit.members" :key="member.id">
+      <div v-for="element in item.members" :key="element.id">
         <!-- <div class="infoElement" v-if="char.id === unit.external_id"> -->
         <div class="infoElement">
-          <p class="infoRelic">{{ member.pivot.rel }}р</p>
-          <p class="infoName">| {{ member.name }}</p>
+          <p class="infoRelic">{{ element.pivot.rel }}р</p>
+          <p class="infoName">| {{ element.name }}</p>
 
         </div>
       </div>
@@ -68,7 +67,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('searchByChar')
+    // this.$store.dispatch('searchByChar')
   },
 
   // computed: {

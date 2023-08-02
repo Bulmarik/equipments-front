@@ -25,8 +25,15 @@ export default {
       state.giAllChars = charname
     },
     SET_RESULT_SEARCH (state, payload) {
-      state.resultSearch = payload.data
-      // console.log(payload.data)
+      // let result = payload.data.map((item) => {
+      //   item['info'] = item.chars
+      //   return item
+      // })
+      // state.resultSearch = result
+      state.resultSearch = payload.data.map((item) => {
+        item['info'] = item.chars
+        return item
+      })
     },
     SET_PARAM_RESULT_REL (state, payload) {
       state.paramResult.rel = payload
@@ -40,21 +47,26 @@ export default {
       }
     },
     SEARCH_BY_CHAR (state, payload) {
-      state.searchByChar = payload.data
+      // state.searchByChar = payload.data
       // let charname = payload.data
       // charname.sort((a, b) => {
       //   if (a.name_ru < b.name_ru) return -1
       //   if (a.name_ru > b.name_ru) return 1
       //   return 0
       // })
-      // state.searchByChar = charname
-      console.log(payload.data)
+      state.resultSearch = payload.data.map((item) => {
+        item['info'] = item.members
+        return item
+      })
+      // console.log(payload.data)
     }
   },
   actions: {
-    async searchByChar ({commit}) {
-      const { data } = await apiClient.post('/search-data-by-char')
+    async searchByChar ({commit, state}) {
+      let param = JSON.stringify(state.paramResult)
+      const { data } = await apiClient.post('/search-data-by-char', param)
       commit('SEARCH_BY_CHAR', data)
+      // console.log(state.paramResult)
     },
     async search ({commit, state}) {
       let param = JSON.stringify(state.paramResult)

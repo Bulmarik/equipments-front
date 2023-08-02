@@ -10,11 +10,11 @@
 <!--      </div>-->
 <!--    </div>-->
 <!--  </div>-->
-  <div class="border border-dark mb-1 p-2" v-for="member in guildmembers" :key="member.id">
-    <h3 class="text-black">{{member.name}}</h3>
-    <div  v-for="chars in member.chars" :key="member.id + '_' + chars.external_id">
-      <span class="infoRelic">{{ chars.pivot.rel }}р</span>
-      <span class="infoName">| {{ chars.name }}</span>
+  <div class="border border-dark mb-1 p-2" v-for="item in guildmembers" :key="item.id">
+    <h3 class="text-black">{{item.name}}</h3>
+    <div  v-for="element in item.info" :key="element.id">
+      <span class="infoRelic">{{ element.pivot.rel }}р</span>
+      <span class="infoName">| {{ element.name }}</span>
     </div>
   </div>
 
