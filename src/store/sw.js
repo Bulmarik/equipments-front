@@ -26,6 +26,7 @@ export default {
     },
     SET_RESULT_SEARCH (state, payload) {
       state.resultSearch = payload.data
+      // console.log(payload.data)
     },
     SET_PARAM_RESULT_REL (state, payload) {
       state.paramResult.rel = payload
@@ -39,13 +40,15 @@ export default {
       }
     },
     SEARCH_BY_CHAR (state, payload) {
-      let charname = payload.data
-      charname.sort((a, b) => {
-        if (a.name_ru < b.name_ru) return -1
-        if (a.name_ru > b.name_ru) return 1
-        return 0
-      })
-      state.searchByChar = charname
+      state.searchByChar = payload.data
+      // let charname = payload.data
+      // charname.sort((a, b) => {
+      //   if (a.name_ru < b.name_ru) return -1
+      //   if (a.name_ru > b.name_ru) return 1
+      //   return 0
+      // })
+      // state.searchByChar = charname
+      console.log(payload.data)
     }
   },
   actions: {

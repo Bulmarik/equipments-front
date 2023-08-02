@@ -20,6 +20,7 @@
 <!--  </li>-->
 
   <li class="reportItem" v-for="unit in searchByChar" :key="unit.id">
+    {{ Жопа }}
     <h3 class="reportItemName">{{ unit.name }}</h3>
     <ul class="reportItemInfo">
       <!-- <li v-for="member in unit.member" :key="member.id"> -->
@@ -59,9 +60,9 @@ export default {
     guildmembers () {
       return this.$store.state.sw.resultSearch
     },
-    chars () {
-      return this.$store.state.sw.searchByChar
-    },
+    // chars () {
+    //   return this.$store.state.sw.searchByChar
+    // },
     searchByChar () {
       return this.$store.state.sw.searchByChar
     }

@@ -1,5 +1,6 @@
 <template>
   <div class="popup" :class="addClass(popupState)">
+    <!-- {{ giAllChars }} -->
     <button class="popupBtn popupBtnReset" @click="clearUnitList">Сброс</button>
     <button class="popupBtn popupBtnOk" @click="popupClose">Ок</button>
     <div class="popupContent">
