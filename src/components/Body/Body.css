@@ -3,31 +3,31 @@
   font-size: 20px;
 }
 
-.report {
+/* .report {
   display: flex;
   flex-direction: column;
   width: 60%;
   background-color: rgb(153, 150, 150);
   padding: 0 10px;
-}
+} */
 
-.reportHeader {
+/* .reportHeader {
   width: 100%;
   display: flex;
   align-items: center;
-}
+} */
 
-.reportRadiobuttons {
+/* .reportRadiobuttons {
   width: 33%;
   display: flex;
-}
+} */
 
-.reportTitle {
+/* .reportTitle {
   width: 33%;
   text-align: center;
-}
+} */
 
-.reportButton {
+/* .reportButton {
   width: 80px;
   height: 35px;
   color: white;
@@ -36,11 +36,11 @@
   background-color: rgb(106, 103, 103);
   justify-self: flex-end;
   margin-left: auto;
-}
+} */
 
-.reportRadiobutton {
+/* .reportRadiobutton {
 
-}
+} */
 
 /* .reportMember {
   display: none;

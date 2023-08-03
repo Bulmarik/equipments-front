@@ -1,41 +1,16 @@
 <template>
 <ul class="reportList">
-  <!-- {{ guildmembers }}
-  {{ chars }} -->
-  <!-- {{ searchByChar }} -->
-  <!-- {{ units }} -->
-<!--  <li class="reportItem" v-for="unit in units" :key="unit.external_id">-->
-<!--    <h3 class="reportItemName">{{ unit.name }}</h3>-->
-<!--    <ul class="reportItemInfo">-->
-<!--      <li v-for="member in guildmembers" :key="member.id">-->
-<!--        <div v-for="char in member.chars" :key="char.id">-->
-<!--          <div class="infoElement" v-if="char.id === unit.external_id">-->
-<!--            <p class="infoRelic">{{ char.relict }}р</p>-->
-<!--            <p class="infoName">| {{ member.name }}</p>-->
-<!--            &lt;!&ndash; {{ addName }} &ndash;&gt;-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </li>-->
-
   <li class="reportItem" v-for="item in searchByChar" :key="item.id">
     <h3 class="reportItemName">{{ item.name }}</h3>
     <ul class="reportItemInfo">
-      <!-- <li v-for="member in unit.member" :key="member.id"> -->
-      <!-- {{ member.name }} -->
-      <div v-for="element in item.members" :key="element.id">
-        <!-- <div class="infoElement" v-if="char.id === unit.external_id"> -->
+      <li v-for="element in item.members" :key="element.id">
         <div class="infoElement">
           <p class="infoRelic">{{ element.pivot.rel }}р</p>
           <p class="infoName">| {{ element.name }}</p>
-
         </div>
-      </div>
-      <!-- </li> -->
+      </li>
     </ul>
   </li>
-
 </ul>
 </template>
 

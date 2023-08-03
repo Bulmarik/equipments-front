@@ -9,10 +9,10 @@
     </div>
   </div>
   <button class="charSelectButton" @click="popupOpen">полный список доступных персонажей</button>
-  <div class="searchChar" v-for="unit in units" :key="unit.id">
+  <div class="searchChar" v-for="char in selectedChars" :key="char.id">
     <label>
-      <input @input="select(unit.id)" type="checkbox" :id="'checkbox_' + unit.id" />
-      {{ unit.name }}
+      <input @input="select(char.id)" type="checkbox" :id="'checkbox_' + char.id" />
+      {{ char.name }}
     </label>
   </div>
 </div>
@@ -22,19 +22,12 @@
 export default {
   name: 'Search',
 
-  props:
-  {
-    units:
-      {
-        type: Array
-      }
-  },
-
-  data () {
-    return {
-      selectChars: []
+  computed: {
+    selectedChars () {
+      return this.$store.state.sw.selectedChars
     }
   },
+
   methods: {
     select (item) {
       this.$store.commit('SET_PARAM_RESULT_CHARS', item)
@@ -43,7 +36,7 @@ export default {
       this.$store.commit('SET_PARAM_RESULT_REL', item.target.value)
     },
     popupOpen () {
-      this.$emit('openPopup', 'visible')
+      this.$store.commit('SET_POPUP_STATE', 'visible')
     }
   }
 }

@@ -1,17 +1,10 @@
 <template>
-<div class="page" @click="filter" style="font-size: 40px; color: white">
+<div class="page" style="font-size: 40px; color: white">
   <Header/>
-  <!-- {{ units }} -->
   <Body
-  :units="units"
-  @openPopup="openPopup"
   />
   <Footer/>
   <Popup
-  @chois="selectChar"
-  :popupState="popupState"
-  @closePopup="closePopup"
-  @clearUnitList="clearUnitList"
   />
 </div>
 </template>
@@ -33,49 +26,13 @@ export default {
     Popup
   },
 
-  data () {
-    return {
-      units: [],
-      popupState: 'invisible'
-    }
-  },
   created () {
-    // this.fetchGiInfo()
     this.fetchGiAllChars()
-  },
-  mounted () {
-    this.filter() // Зачем он?
   },
 
   methods: {
-    fetchGiInfo () {
-      this.$store.dispatch('giInfo')
-    },
     fetchGiAllChars () {
       this.$store.dispatch('giAllChars')
-    },
-    filter () {
-    },
-
-    selectChar (item) {
-      const index = this.units.findIndex((c) => c.id === item.id)
-      if (index !== -1) {
-        this.units.splice(index, 1)
-      } else {
-        this.units.push(item)
-      }
-    },
-
-    clearUnitList () {
-      this.units = []
-    },
-
-    openPopup (state) {
-      this.popupState = state
-    },
-
-    closePopup (state) {
-      this.popupState = state
     }
   }
 }

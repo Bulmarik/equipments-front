@@ -1,58 +1,49 @@
 <template>
   <div class="report">
-    лист0
     <div class="reportHeader">
-      <!-- {{ units }} -->
-      <!-- {{$store.state.sw.giInfo}} -->
-      <!-- {{$store.state.sw.giAllChars}} -->
-      <div class="reportRadiobuttons">
-        <div class="reportRadiobutton">
-          <!-- <input type="radio" value="us" v-model="us"> -->
-          <input type="radio">
-          <label>по игрокам</label>
-        </div>
-        <div class="reportRadiobutton">
-          <!-- <input type="radio" value="char" v-model="char"> -->
-          <input type="radio">
-          <label>по персонажам</label>
-        </div>
-      </div>
+      <button class="searchBtn" @click.prevent="search('member')">Поиск по игрокам</button>
       <h2 class="title reportTitle">Отчет</h2>
-      <button class="reportButton">Искать</button>
+      <button class="searchBtn" @click.prevent="search('char')">Поиск по персонажам</button>
     </div>
-    <ReportByUser class="reportMember"
-    :guildmember="guildmember"
-    />
-    <ReportByUnit class="reportChar"
-    :units="units"
-    :guildmember="guildmember"
-    />
+    <ul class="reportList">
+      <li class="reportItem" v-for="item in resultReport" :key="item.id">
+        <h3 class="reportItemName">{{ item.name }}</h3>
+        <ul class="reportItemInfo">
+          <li class="infoElement" v-for="element in item.info" :key="element.id">
+            <p class="infoRelic">{{ element.pivot.rel }}р</p>
+            <p class="infoName">| {{ element.name }}</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// import Search from '../Search/Search.vue'
-import ReportByUser from '../ReportByUser/ReportByUser.vue'
-import ReportByUnit from '../ReportByUnit/ReportByUnit.vue'
-
 export default {
   name: 'Report',
 
-  components: {
-    ReportByUser,
-    ReportByUnit
+  data () {
+    return {
+      stateSearch: null
+    }
   },
 
-  props:
-  {
-    guildmember:
-      {
-        type: Array
-      },
-    units:
-      {
-        type: Array
+  computed: {
+    resultReport () {
+      return this.$store.state.sw.resultSearch
+    }
+  },
+
+  methods: {
+    search (e) {
+      if (e === 'member') {
+        this.$store.dispatch('search')
       }
+      if (e === 'char') {
+        this.$store.dispatch('searchByChar')
+      }
+    }
   }
 }
 </script>
