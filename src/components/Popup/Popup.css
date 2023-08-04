@@ -34,7 +34,7 @@
 }
 
 .popupBtn {
-  width: 100px;
+  width: 150px;
   height: 30px;
   font-size: 14px;
   position: absolute;
@@ -49,8 +49,18 @@
   left: 0;
 }
 
-.popupBtnReset:hover {
+/* .popupBtnReset:hover {
   box-shadow: 1px 1px 5px crimson;
+} */
+
+.popupBtnCreateSelection {
+  background-color: rgb(153, 150, 150);
+  left: 170px;
+}
+
+.popupBtnSelections {
+  background-color: rgb(153, 150, 150);
+  right: 170px;
 }
 
 .popupBtnOk {
@@ -58,9 +68,9 @@
   right: 0;
 }
 
-.popupBtnOk:hover {
+/* .popupBtnOk:hover {
   box-shadow: -1px 1px 5px rgb(75, 187, 159);
-}
+} */
 
 .popupItem {
   background-color: rgb(85, 90, 114);
@@ -71,7 +81,7 @@
 .popupItemLabel {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   position: relative;
   top: 0;
   transition: box-shadow 0.1s ease-in 0.1s, top 0.1s ease-in 0.1s;
@@ -90,6 +100,7 @@
 
 .popupItemCheckbox {
   margin-right: 3px;
+  /* display: none; */
 }
 
 .popupItemIcon {
@@ -97,10 +108,75 @@
   width: 45px;
 }
 
-.popupOpen {
+.popupCreate {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  display: none;
+}
+
+.popupCreateOverlay {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: .5;
+}
+
+.popupCreateContainer {
+  height: 40px;
+  width: 600px;
+  background-color: rgb(153, 150, 150);
+  top: calc((100% - 40px) / 2);
+  left: calc((100% - 600px) / 2);
+  position: absolute;
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.popupInput {
+  height: 100%;
+  /* width: 80%; */
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-align: center;
+  flex-grow: 1;
+  margin: 0 5px;
+}
+
+.popupBtnCancel {
+  position: relative;
+  border: none;
+  border-radius: 5px;
+  background-color: crimson;
+}
+
+.popupBtnSave {
+  position: relative;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(75, 187, 159)
+}
+
+.popupSelections {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(85, 90, 114);
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  display: none;
+}
+
+.open {
   display: block;
 }
 
-.popupClose {
+.close {
   display: none;
 }
