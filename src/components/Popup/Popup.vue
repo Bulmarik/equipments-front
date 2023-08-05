@@ -8,12 +8,13 @@
       <h2 class="popupTitle">Персонажи</h2>
       <div class="popupGrid">
         <div class="popupItem" v-for="char in giAllChars" :key="char.id" v-if="char.type === 'char'">
+          <input class="popupItemCheckbox" @input="selectedChar(char)" type="checkbox" :id="'checkbox_' + char.id" />
             <label class="popupItemLabel">
-              <img class="popupItemIcon" :src="char.image" alt="иконка перса">
-              <div class="popupItemLabelBox">
-                <input class="popupItemCheckbox" @input="selectedChar(char)" type="checkbox" :id="'checkbox_' + char.id" />
+              <span class="popupItemLabelBox">
+
                 {{ char.name_ru }}
-              </div>
+              </span>
+              <img class="popupItemIcon" :src="char.image" alt="иконка перса">
             </label>
         </div>
       </div>
@@ -21,11 +22,11 @@
       <div class="popupGrid">
         <div class="popupItem" v-for="char in giAllChars" :key="char.id" v-if="char.type === 'ship'">
           <label class="popupItemLabel">
-            <img class="popupItemIcon" :src="char.image" alt="иконка корабля">
-            <div class="popupItemLabelBox">
+            <span class="popupItemLabelBox">
               <input class="popupItemCheckbox" @input="selectedChar(char)" type="checkbox" :id="'checkbox_' + char.id" />
               {{ char.name_ru }}
-            </div>
+            </span>
+            <img class="popupItemIcon" :src="char.image" alt="иконка корабля">
           </label>
         </div>
       </div>
@@ -55,8 +56,20 @@ export default {
     }
   },
 
-  created () {
-    this.checkboxes = document.querySelectorAll('.popupItemCheckbox')
+  mounted () {
+    // this.checkboxes = document.querySelectorAll('.popupItemCheckbox')
+    let rr = document.querySelectorAll('.popupItemLabelBox')
+    // this.checkboxes = rr.forEach(e => {
+    //   console.log(e.querySelector('input'))
+    //   // this.checkboxes[e.querySelector('input')]
+    // })
+    for (let i in rr) {
+      console.log(rr[i])
+      this.checkboxes.push(rr[i])
+      // this.checkboxes[i] = rr[i].querySelector('input')
+    }
+    console.log(this.checkboxes.length)
+    console.log(document.querySelectorAll('.popupItemLabelBox').length)
   },
 
   computed: {
@@ -85,9 +98,13 @@ export default {
     clearUnitList () {
       this.$store.commit('SET_SELECTED_CHARS', 'clear')
       this.$store.commit('SET_PARAM_RESULT_CHARS', 'clear')
-      this.$store.dispatch('search')
+      this.$store.commit('SET_RESULT_SEARCH', [])
+
+      // this.$store.dispatch('search')
       for (let i in this.checkboxes) {
         this.checkboxes[i].checked = false
+        console.log(this.checkboxes)
+        console.log(this.checkboxes.length)
       }
     },
     openInput () {
