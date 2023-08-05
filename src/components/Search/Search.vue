@@ -30,10 +30,10 @@ export default {
 
   methods: {
     select (item) {
-      this.$store.commit('SET_PARAM_RESULT_CHARS', item)
+      this.$store.commit('SET_SEARCH_PARAM_CHARS', item)
     },
     selectRel (item) {
-      this.$store.commit('SET_PARAM_RESULT_REL', item.target.value)
+      this.$store.commit('SET_SEARCH_PARAM_REL', item.target.value)
     },
     popupOpen () {
       this.$store.commit('SET_POPUP_STATE', 'visible')

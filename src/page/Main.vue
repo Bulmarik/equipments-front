@@ -27,12 +27,12 @@ export default {
   },
 
   created () {
-    this.fetchGiAllChars()
+    this.fetchGetAllChars()
   },
 
   methods: {
-    fetchGiAllChars () {
-      this.$store.dispatch('giAllChars')
+    fetchGetAllChars () {
+      this.$store.dispatch('getAllChars')
     }
   }
 }

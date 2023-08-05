@@ -7,26 +7,25 @@
     <div class="popupContent">
       <h2 class="popupTitle">Персонажи</h2>
       <div class="popupGrid">
-        <div class="popupItem" v-for="char in giAllChars" :key="char.id" v-if="char.type === 'char'">
-          <input class="popupItemCheckbox" @input="selectedChar(char)" type="checkbox" :id="'checkbox_' + char.id" />
+        <div class="popupItem" v-for="char in allChars" :key="char.id" v-if="char.type === 'char'">
             <label class="popupItemLabel">
-              <span class="popupItemLabelBox">
-
-                {{ char.name_ru }}
-              </span>
               <img class="popupItemIcon" :src="char.image" alt="иконка перса">
+              <div class="popupItemLabelBox">
+                <input class="popupCheckbox" @input="selectedChar(char)" type="checkbox" :id="'checkbox_' + char.id" />
+                {{ char.name_ru }}
+              </div>
             </label>
         </div>
       </div>
       <h2 class="popupTitle">Корабли</h2>
       <div class="popupGrid">
-        <div class="popupItem" v-for="char in giAllChars" :key="char.id" v-if="char.type === 'ship'">
+        <div class="popupItem" v-for="char in allChars" :key="char.id" v-if="char.type === 'ship'">
           <label class="popupItemLabel">
-            <span class="popupItemLabelBox">
+            <img class="popupItemIcon" :src="char.image" alt="иконка корабля">
+            <div class="popupItemLabelBox">
               <input class="popupItemCheckbox" @input="selectedChar(char)" type="checkbox" :id="'checkbox_' + char.id" />
               {{ char.name_ru }}
-            </span>
-            <img class="popupItemIcon" :src="char.image" alt="иконка корабля">
+            </div>
           </label>
         </div>
       </div>
@@ -50,31 +49,9 @@
 export default {
   name: 'Popup',
 
-  data () {
-    return {
-      checkboxes: []
-    }
-  },
-
-  mounted () {
-    // this.checkboxes = document.querySelectorAll('.popupItemCheckbox')
-    let rr = document.querySelectorAll('.popupItemLabelBox')
-    // this.checkboxes = rr.forEach(e => {
-    //   console.log(e.querySelector('input'))
-    //   // this.checkboxes[e.querySelector('input')]
-    // })
-    for (let i in rr) {
-      console.log(rr[i])
-      this.checkboxes.push(rr[i])
-      // this.checkboxes[i] = rr[i].querySelector('input')
-    }
-    console.log(this.checkboxes.length)
-    console.log(document.querySelectorAll('.popupItemLabelBox').length)
-  },
-
   computed: {
-    giAllChars () {
-      return this.$store.state.sw.giAllChars
+    allChars () {
+      return this.$store.state.sw.allChars
     },
     popupState () {
       return this.$store.state.sw.popupState
@@ -97,15 +74,12 @@ export default {
     },
     clearUnitList () {
       this.$store.commit('SET_SELECTED_CHARS', 'clear')
-      this.$store.commit('SET_PARAM_RESULT_CHARS', 'clear')
-      this.$store.commit('SET_RESULT_SEARCH', [])
-
-      // this.$store.dispatch('search')
-      for (let i in this.checkboxes) {
-        this.checkboxes[i].checked = false
-        console.log(this.checkboxes)
-        console.log(this.checkboxes.length)
-      }
+      this.$store.commit('SET_SEARCH_PARAM_CHARS', 'clear')
+      this.$store.commit('SET_SEARCH_RESULT', '[]')
+      this.checkboxes = document.querySelectorAll('.popupCheckbox')
+      this.checkboxes.forEach((el) => {
+        el.checked = false
+      })
     },
     openInput () {
       this.$refs.popupCreateSelection.classList.add('open')

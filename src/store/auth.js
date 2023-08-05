@@ -13,7 +13,7 @@ export default {
     SET_USER_DATA (state, userData) {
       const token = userData.token
       state.user = userData
-      console.log(userData, 'userData')
+      // console.log(userData, 'userData')
       apiClient.defaults.headers.common.Authorization = `Bearer ${userData.token}`
       delete userData.token
       window.localStorage.setItem('user_data', JSON.stringify(userData))

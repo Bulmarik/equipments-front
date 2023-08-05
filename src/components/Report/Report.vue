@@ -1,9 +1,9 @@
 <template>
   <div class="report">
     <div class="reportHeader">
-      <button class="searchBtn" @click.prevent="search('member')">Поиск по игрокам</button>
+      <button class="searchBtn" @click.prevent="search('members')">Поиск по игрокам</button>
       <h2 class="title reportTitle">Отчет</h2>
-      <button class="searchBtn" @click.prevent="search('char')">Поиск по персонажам</button>
+      <button class="searchBtn" @click.prevent="search('chars')">Поиск по персонажам</button>
     </div>
     <ul class="reportList">
       <li class="reportItem" v-for="item in resultReport" :key="item.id">
@@ -31,17 +31,18 @@ export default {
 
   computed: {
     resultReport () {
-      return this.$store.state.sw.resultSearch
+      // console.log('жопа' + el.checked)
+      return this.$store.state.sw.searchResult
     }
   },
 
   methods: {
     search (e) {
-      if (e === 'member') {
-        this.$store.dispatch('search')
+      if (e === 'members') {
+        this.$store.dispatch('searchByMembers')
       }
-      if (e === 'char') {
-        this.$store.dispatch('searchByChar')
+      if (e === 'chars') {
+        this.$store.dispatch('searchByChars')
       }
     }
   }
