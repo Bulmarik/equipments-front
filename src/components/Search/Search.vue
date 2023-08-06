@@ -3,16 +3,19 @@
   <h2 class="title searchTitle">Запрос</h2>
   <div class="searchRel">
     <p class="searchRelDesc">наименьший уровень реликта</p>
-    <div v-for="rel in 9" :key="rel">
-      <input @input="selectRel" name="rel" :id="rel" type="radio" :value="rel">
-      <label :for="rel">{{rel}}</label>
+    <div v-for="rel in 10" :key="rel">
+      <input @input="selectRel" name="rel" :id="rel" type="radio" :value="rel - 1">
+      <label :for="rel">{{rel - 1}}</label>
     </div>
   </div>
-  <button class="charSelectButton" @click="popupOpen">полный список доступных персонажей</button>
+  <div class="searchListButtons">
+    <button class="charResetButton">сброс</button>
+    <button class="charSelectButton" @click="popupOpen">полный список доступных персонажей</button>
+  </div>
   <div class="searchChar" v-for="char in selectedChars" :key="char.id">
     <label>
       <input @input="select(char.id)" type="checkbox" :id="'checkbox_' + char.id" />
-      {{ char.name }}
+      {{ char.name_ru }}
     </label>
   </div>
 </div>

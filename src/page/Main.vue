@@ -1,8 +1,7 @@
 <template>
 <div class="page" style="font-size: 40px; color: white">
   <Header/>
-  <Body
-  />
+  <Body/>
   <Footer/>
   <Popup
   />

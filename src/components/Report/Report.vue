@@ -7,11 +7,12 @@
     </div>
     <ul class="reportList">
       <li class="reportItem" v-for="item in resultReport" :key="item.id">
-        <h3 class="reportItemName">{{ item.name_ru }}</h3>
+        <h3 class="reportItemName">[{{ item.info.length }}] {{ item.name_ru }}</h3>
         <ul class="reportItemInfo">
           <li class="infoElement" v-for="element in item.info" :key="element.id">
-            <p class="infoRelic">{{ element.pivot.rel }}р</p>
-            <p class="infoName">| {{ element.name_ru }}</p>
+            <p class="infoRelic" v-if="element.pivot.rel !== null">{{ element.pivot.rel }}р</p>
+            <p class="infoRelic" v-else>{{ element.pivot.rarity }}{{ element.pivot.tir }}т</p>
+            <p class="infoName"> {{ element.name_ru }}</p>
           </li>
         </ul>
       </li>
@@ -31,7 +32,6 @@ export default {
 
   computed: {
     resultReport () {
-      // console.log('жопа' + el.checked)
       return this.$store.state.sw.searchResult
     }
   },
