@@ -32,6 +32,7 @@ export default {
         }
       }
     },
+
     SET_SEARCH_PARAM_REL (state, payload) {
       state.searchParam.rel = payload
     },
@@ -49,6 +50,7 @@ export default {
           state.selectedChars.push(payload)
         }
       }
+      // console.log(state.selectedChars)
     },
     SET_POPUP_STATE (state, payload) {
       state.popupState = payload
@@ -72,5 +74,12 @@ export default {
     }
   },
 
-  getters: {}
+  getters: {
+    GET_ALL_CHARS (state) {
+      return state.allChars
+    },
+    GET_SELECTED_CHARS (state) {
+      return state.selectedChars
+    }
+  }
 }
