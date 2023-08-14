@@ -38,6 +38,11 @@
   list-style: none;
 }
 
+.reportItemTitle {
+  margin: 0;
+  /* text-align: center; */
+}
+
 .reportItem {
   width: 100%;
   display: flex;
@@ -69,7 +74,14 @@
 .infoRelic {
   width: 55px;
   margin: 0 5px 0 0;
-  text-align: end;
+  text-align: center;
+}
+
+.infoRarity {
+  width: 55px;
+  margin: 0 5px 0 0;
+  color: rgb(106, 103, 103);
+  text-align: center;
 }
 
 .infoName {

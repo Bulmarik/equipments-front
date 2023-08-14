@@ -4,7 +4,7 @@
 @import url(../components/Search/Search.css);
 @import url(../components/Report/Report.css);
 @import url(../components/Footer/Footer.css);
-@import url(../components/Popup/Popup.css);
+@import url(../page/CharList.css);
 
 .page {
   min-height: 100vh;

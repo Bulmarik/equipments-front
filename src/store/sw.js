@@ -8,11 +8,11 @@ export default {
       rel: null
     },
     searchResult: [],
-    selectedChars: [],
-    popupState: 'invisible'
+    selectedChars: []
   },
 
   mutations: {
+    // Полный список персонажей в алфавитном порядке
     SET_ALL_CHARS (state, payload) {
       state.allChars = payload.data.sort((a, b) => {
         if (a.name_ru < b.name_ru) return -1
@@ -20,6 +20,22 @@ export default {
         return 0
       })
     },
+
+    // Выбранные персонажи
+    SET_SELECTED_CHARS (state, payload) {
+      if (payload === 'clear') {
+        state.selectedChars = []
+      } else {
+        const index = state.selectedChars.findIndex((c) => c.id === payload.id)
+        if (index !== -1) {
+          state.selectedChars.splice(index, 1)
+        } else {
+          state.selectedChars.push(payload)
+        }
+      }
+    },
+
+    // Искомые персонажи
     SET_SEARCH_PARAM_CHARS (state, payload) {
       if (payload === 'clear') {
         state.searchParam.ids = []
@@ -33,27 +49,14 @@ export default {
       }
     },
 
+    // Уровень реликтов искомых персонажей
     SET_SEARCH_PARAM_REL (state, payload) {
       state.searchParam.rel = payload
     },
+
+    // Результаты поиска
     SET_SEARCH_RESULT (state, payload) {
       state.searchResult = payload.data
-    },
-    SET_SELECTED_CHARS (state, payload) {
-      if (payload === 'clear') {
-        state.selectedChars = []
-      } else {
-        const index = state.selectedChars.findIndex((c) => c.id === payload.id)
-        if (index !== -1) {
-          state.selectedChars.splice(index, 1)
-        } else {
-          state.selectedChars.push(payload)
-        }
-      }
-      // console.log(state.selectedChars)
-    },
-    SET_POPUP_STATE (state, payload) {
-      state.popupState = payload
     }
   },
 
