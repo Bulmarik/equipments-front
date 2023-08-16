@@ -6,8 +6,8 @@
       <button class="searchBtn" @click.prevent="search('searchByChars')">Поиск по персонажам</button>
     </div>
     <ul class="reportList">
-      <p class="reportItemTitle">{{ addTitleText(resultReport) }}</p>
-      <li class="reportItem" v-for="item in resultReport" :key="item.id">
+      <p class="reportItemTitle">{{ addTitleText(GET_SEARCH_RESULT) }}</p>
+      <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id">
         <h3 class="reportItemName"> {{ item.name_ru }} {{ isNaN(item.external_id) && item.info.length > 1 ? `[${item.info.length}]` : ''}}</h3>
         <ul class="reportItemInfo">
           <li class="infoElement" v-for="element in item.info" :key="element.id">
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'Report',
 
@@ -32,27 +34,17 @@ export default {
   },
 
   computed: {
-    resultReport () {
-      return this.$store.state.sw.searchResult
-    }
+    ...mapGetters([
+      'GET_SEARCH_RESULT'
+    ])
   },
 
   methods: {
-    // search (e) {
-    //   if (e === 'members') {
-    //     this.$store.dispatch('searchByMembers')
-    //   }
-    //   if (e === 'chars') {
-    //     this.$store.dispatch('searchByChars')
-    //   }
-    // }
-
     search (value) {
       this.$store.dispatch(value)
     },
 
     addTitleText (resultReport) {
-      // console.log(resultReport)
       if (resultReport && resultReport.length > 0) {
         if (resultReport.find(item => !isNaN(item.external_id))) {
           return `Найдено игроков [${resultReport.length}]`

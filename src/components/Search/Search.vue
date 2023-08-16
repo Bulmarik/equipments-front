@@ -4,7 +4,7 @@
   <div class="searchRel">
     <p class="searchRelDesc">наименьший уровень реликтов</p>
     <div v-for="rel in 10" :key="rel">
-      <input @input="selectRel" name="rel" :id="rel" type="radio" :value="rel - 1">
+      <input type="radio" @input="selectRel" :id="rel" name="rel" :value="rel - 1" :checked="checked(rel - 1, 'rel')"/>
       <label :for="rel">{{rel - 1}}</label>
     </div>
   </div>
@@ -14,9 +14,9 @@
       <button class="charSelectButton">полный список доступных персонажей</button>
     </router-link>
   </div>
-  <div class="searchChar" v-for="char in selectedChars" :key="char.id">
+  <div class="searchChar" v-for="char in GET_SELECTED_CHARS" :key="char.id">
     <label>
-      <input @input="select(char.id)" type="checkbox" :id="'checkbox_' + char.id" />
+      <input type="checkbox" @input="select(char.id)" :id="'checkbox_' + char.id" :checked="checked(char.id, 'ids')"/>
       {{ char.name_ru }}
     </label>
   </div>
@@ -24,13 +24,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'Search',
 
   computed: {
-    selectedChars () {
-      return this.$store.state.sw.selectedChars
-    }
+    ...mapGetters([
+      'GET_SELECTED_CHARS',
+      'GET_SEARCH_PARAM'
+    ])
   },
 
   methods: {
@@ -48,6 +51,13 @@ export default {
       this.$store.commit('SET_SELECTED_CHARS', 'clear')
       this.$store.commit('SET_SEARCH_PARAM_CHARS', 'clear')
       this.$store.commit('SET_SEARCH_RESULT', '[]')
+    },
+    checked (value, param) {
+      if (param === 'ids') {
+        return this.GET_SEARCH_PARAM[param].find(item => item === value)
+      } else {
+        return Number(this.GET_SEARCH_PARAM[param]) === value
+      }
     }
   }
 }

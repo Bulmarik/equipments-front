@@ -3,12 +3,12 @@ import { apiClient } from '../services/api'
 export default {
   state: {
     allChars: {},
+    selectedChars: [],
     searchParam: {
       ids: [],
       rel: null
     },
-    searchResult: [],
-    selectedChars: []
+    searchResult: []
   },
 
   mutations: {
@@ -83,6 +83,12 @@ export default {
     },
     GET_SELECTED_CHARS (state) {
       return state.selectedChars
+    },
+    GET_SEARCH_PARAM (state) {
+      return state.searchParam
+    },
+    GET_SEARCH_RESULT (state) {
+      return state.searchResult
     }
   }
 }

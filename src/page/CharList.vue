@@ -75,7 +75,6 @@ export default {
 
   methods: {
     setSelectedChar (item) {
-      // console.log(clearList)
       this.isChecked(item)
       this.$store.commit('SET_SELECTED_CHARS', item)
     },
