@@ -24,7 +24,7 @@
           <label class="charListItemLabel">
             <img class="charListItemIcon" :src="char.image" alt="иконка корабля">
             <div class="charListItemLabelBox">
-              <input class="charListItemCheckbox" @input="setSelectedChar(char)" type="checkbox" :id="'checkbox_' + char.id">
+              <!-- <input class="charListItemCheckbox" @input="setSelectedChar(char)" type="checkbox" :id="'checkbox_' + char.id"> -->
               {{ char.name_ru }}
             </div>
           </label>
@@ -42,9 +42,9 @@
     <div class="charListSelections" ref="charListSelections">
       <button class="charListBtn charListBtnCancel" @click="closeSelections">Отмена</button>
       <button class="charListBtn charListBtnSave" @click="closeSelections">Ok</button>
-      <div class="charListSelection" v-for="item in getSelection" :key="item.id">
+      <!-- <div class="charListSelection" v-for="item in getSelection" :key="item.id">
         {{item}}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -96,41 +96,30 @@ export default {
     },
 
     saveSelection () {
-      // localStorage.clear()
-
-      if (localStorage.getItem('groups')) {
-        const groups = JSON.parse(localStorage.getItem('groups'))
-        groups.push({
-          groupName: this.groupName,
-          groupItems: this.$store.state.sw.selectedChars
+      this.$store.dispatch('saveSelection', this.groupName)
+        .then(response => {
+          console.log(response)
         })
-        localStorage.setItem('groups', JSON.stringify(groups))
-      } else {
-        const groups = []
-        groups.push({
-          groupName: this.groupName,
-          groupItems: this.$store.state.sw.selectedChars
-        })
-        localStorage.setItem('groups', JSON.stringify(groups))
-      }
-      // console.log(JSON.parse(localStorage.getItem('groups')))
     },
 
     openSelections () {
-      this.data.selections = JSON.parse(localStorage.getItem('groups'))
-      this.$refs.charListSelections.classList.add('open')
-      console.log(this.data.selections)
+      // this.data.selections = JSON.parse(localStorage.getItem('groups'))
+      // console.log(this.data.selections)
+
+      this.$store.dispatch('selections')
+
+      // this.$refs.charListSelections.classList.add('open')
     },
 
     closeSelections () {
       this.$refs.charListSelections.classList.remove('open')
     },
 
-    getSelection () {
-      let selections
-      selections = JSON.parse(localStorage.getItem('groups'))
-      return selections
-    },
+    // getSelection () {
+    //   let selections
+    //   selections = JSON.parse(localStorage.getItem('groups'))
+    //   return selections
+    // },
 
     isChecked (item) {
       document.getElementById(item.id).classList.toggle('checked')

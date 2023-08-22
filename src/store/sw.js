@@ -8,7 +8,8 @@ export default {
       ids: [],
       rel: null
     },
-    searchResult: []
+    searchResult: [],
+    selections: {}
   },
 
   mutations: {
@@ -57,6 +58,14 @@ export default {
     // Результаты поиска
     SET_SEARCH_RESULT (state, payload) {
       state.searchResult = payload.data
+    },
+
+    // Подборки
+    SET_SELECTIONS (state, payload) {
+      console.log(payload.data)
+
+      state.selections = payload.data
+      // console.log(state.selectoins)
     }
   },
 
@@ -74,6 +83,20 @@ export default {
       let param = JSON.stringify(state.searchParam)
       const { data } = await apiClient.post('/search-data-by-char', param)
       commit('SET_SEARCH_RESULT', data)
+    },
+    async saveSelection ({state}, param) {
+      let selection = {
+        name: param,
+        ids: state.selectedChars.map(el => el.id)
+      }
+      const { data } = await apiClient.post('/group', JSON.stringify(selection))
+      console.log(data)
+      return data
+    },
+    async selections ({commit}) {
+      console.log('пошел запрос')
+      const { data } = await apiClient.get('/group')
+      commit('SET_SELECTIONS', data)
     }
   },
 
@@ -89,6 +112,9 @@ export default {
     },
     GET_SEARCH_RESULT (state) {
       return state.searchResult
+    },
+    GET_SELECTIONS (state) {
+      return state.selections
     }
   }
 }
