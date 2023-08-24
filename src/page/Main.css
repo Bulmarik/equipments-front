@@ -5,6 +5,7 @@
 @import url(../components/Report/Report.css);
 @import url(../components/Footer/Footer.css);
 @import url(../page/CharList.css);
+@import url(../page/SelectionList.css);
 
 .page {
   min-height: 100vh;

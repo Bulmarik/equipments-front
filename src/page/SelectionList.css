@@ -1,0 +1,91 @@
+.selectionList {
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(85, 90, 114);
+  /* border: 1px solid red; */
+  position: relative;
+}
+
+.selectionListButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+
+}
+
+.selectionListBtn {
+  width: 150px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.selectionListBtnCancel {
+  background-color: crimson;
+}
+
+.selectionListBtnOk {
+  background-color: rgb(75, 187, 159);
+}
+
+.selectionListContent {
+  width: 100%;
+  max-height: 100%;
+  color: white;
+  /* border: 1px solid red; */
+  overflow-y: auto;
+}
+
+.selectionListTitle {
+  height: 32px;
+  font-size: 20px;
+  margin: 0;
+  padding: 3px;
+  text-align: center;
+}
+
+.selections {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid gray; */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.selection {
+  /* width: 100%; */
+  display: flex;
+  margin: 3px;
+  padding: 2px;
+  border-radius: 10px;
+  background-color: rgb(153, 150, 150);
+}
+
+.checkedSelection {
+  background-color: rgb(75, 187, 159);
+}
+
+.selectionName {
+  width: 20%;
+  padding-left: 10px;
+  align-self: center;
+}
+
+.selectionItems {
+  display: flex;
+  /* border: 1px solid yellow; */
+}
+.selectionItem {
+  /* display: flex; */
+  /* border: 1px solid blue; */
+}
+
+.selectionItemImage {
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  margin: 0 2px;
+}

@@ -9,7 +9,9 @@ export default {
       rel: null
     },
     searchResult: [],
-    selections: {}
+    selections: {},
+    selectedSelections: [],
+    charCount: {}
   },
 
   mutations: {
@@ -41,6 +43,8 @@ export default {
       if (payload === 'clear') {
         state.searchParam.ids = []
       } else {
+        // console.log(state.searchParam.ids)
+        // console.log(payload)
         const index = state.searchParam.ids.findIndex((c) => c === payload)
         if (index !== -1) {
           state.searchParam.ids.splice(index, 1)
@@ -62,10 +66,25 @@ export default {
 
     // Подборки
     SET_SELECTIONS (state, payload) {
-      console.log(payload.data)
-
+      // console.log('payload.data в мутации')
       state.selections = payload.data
-      // console.log(state.selectoins)
+      // console.log(state.selections)
+    },
+
+    SET_SELECTED_SELECTION (state, payload) {
+      const checkedSelections = state.selections.filter(selection => payload.includes(selection.id))
+      checkedSelections.forEach(checkedSelection => {
+        checkedSelection.chars.forEach(char => {
+          const charExists = state.selectedChars.find(selectedChar => selectedChar.id * 1 === char.id * 1)
+          if (!charExists) {
+            state.selectedChars.push(char)
+          } else {
+            // state.charCount[char.id] = 0
+            // const charCount = state.charCount[char.id]
+            // console.log(charCount)
+          }
+        })
+      })
     }
   },
 
@@ -90,11 +109,11 @@ export default {
         ids: state.selectedChars.map(el => el.id)
       }
       const { data } = await apiClient.post('/group', JSON.stringify(selection))
-      console.log(data)
+      // console.log(data)
       return data
     },
     async selections ({commit}) {
-      console.log('пошел запрос')
+      // console.log('пошел запрос')
       const { data } = await apiClient.get('/group')
       commit('SET_SELECTIONS', data)
     }

@@ -2,7 +2,10 @@
   <div class="charList">
     <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
     <button class="charListBtn charListBtnCreateSelection" @click="openInput">Создать подборку</button>
-    <button class="charListBtn charListBtnSelections" @click="openSelections">Подборки</button>
+    <router-link :to="{ name: 'SelectionList' }">
+        <button class="charListBtn charListBtnSelections" @click="openSelections">Подборки</button>
+        <!-- <button class="charListBtn charListBtnSelections">Подборки</button> -->
+    </router-link>
     <router-link :to="{ name: 'Main' }">
       <button class="charListBtn charListBtnOk">Ок</button>
     </router-link>
@@ -34,17 +37,10 @@
     <div class="charListCreate" ref="charListCreateSelection">
       <div class="charListCreateOverlay"></div>
       <form class="charListCreateContainer">
-        <button class="charListBtn charListBtnCancel" @click="closeInput()">Отмена</button>
+        <button class="charListBtn charListBtnCancel" @click.prevent="closeInput()">Отмена</button>
         <input class="charListInput" v-model="groupName" type="text" placeholder="Введите название группы">
         <button class="charListBtn charListBtnSave" @click.prevent="saveSelection">Сохранить</button>
       </form>
-    </div>
-    <div class="charListSelections" ref="charListSelections">
-      <button class="charListBtn charListBtnCancel" @click="closeSelections">Отмена</button>
-      <button class="charListBtn charListBtnSave" @click="closeSelections">Ok</button>
-      <!-- <div class="charListSelection" v-for="item in getSelection" :key="item.id">
-        {{item}}
-      </div> -->
     </div>
   </div>
 </template>
@@ -69,7 +65,8 @@ export default {
   computed: {
     ...mapGetters([
       'GET_ALL_CHARS',
-      'GET_SELECTED_CHARS'
+      'GET_SELECTED_CHARS',
+      'GET_SELECTIONS'
     ])
   },
 
@@ -100,6 +97,7 @@ export default {
         .then(response => {
           console.log(response)
         })
+      this.closeInput()
     },
 
     openSelections () {
@@ -107,13 +105,13 @@ export default {
       // console.log(this.data.selections)
 
       this.$store.dispatch('selections')
-
+      // console.log(this.GET_SELECTIONS)
       // this.$refs.charListSelections.classList.add('open')
     },
 
-    closeSelections () {
-      this.$refs.charListSelections.classList.remove('open')
-    },
+    // closeSelections () {
+    //   this.$refs.charListSelections.classList.remove('open')
+    // },
 
     // getSelection () {
     //   let selections
@@ -126,7 +124,7 @@ export default {
     },
 
     checked (char) {
-      return this.GET_SELECTED_CHARS.find(item => item.id === char.id) ? 'checked' : ''
+      return this.GET_SELECTED_CHARS.find(item => item.id * 1 === char.id * 1) ? 'checked' : ''
     }
   }
 }
