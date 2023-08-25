@@ -36,6 +36,11 @@ export default {
           state.selectedChars.push(payload)
         }
       }
+      state.selectedChars = state.selectedChars.sort((a, b) => {
+        if (a.name_ru < b.name_ru) return -1
+        if (a.name_ru > b.name_ru) return 1
+        return 0
+      })
     },
 
     // Искомые персонажи
@@ -71,19 +76,27 @@ export default {
       // console.log(state.selections)
     },
 
+    // Выбранные подборки
     SET_SELECTED_SELECTION (state, payload) {
       const checkedSelections = state.selections.filter(selection => payload.includes(selection.id))
       checkedSelections.forEach(checkedSelection => {
         checkedSelection.chars.forEach(char => {
           const charExists = state.selectedChars.find(selectedChar => selectedChar.id * 1 === char.id * 1)
           if (!charExists) {
+            // console.log(char)
             state.selectedChars.push(char)
+            state.searchParam.ids.push(char.id)
           } else {
             // state.charCount[char.id] = 0
             // const charCount = state.charCount[char.id]
             // console.log(charCount)
           }
         })
+      })
+      state.selectedChars = state.selectedChars.sort((a, b) => {
+        if (a.name_ru < b.name_ru) return -1
+        if (a.name_ru > b.name_ru) return 1
+        return 0
       })
     }
   },
@@ -116,6 +129,11 @@ export default {
       // console.log('пошел запрос')
       const { data } = await apiClient.get('/group')
       commit('SET_SELECTIONS', data)
+    },
+    async deleteSelection ({state}, param) {
+      // console.log('асинк ' + param)
+      const { data } = await apiClient.delete('/group/' + param)
+      return data
     }
   },
 

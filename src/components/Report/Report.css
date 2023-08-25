@@ -10,11 +10,11 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
 }
 
 .searchBtn {
-  width: 33%;
+  min-width: 33%;
   min-height: 35px;
   color: white;
   border: none;
@@ -22,6 +22,16 @@
   background-color: rgb(106, 103, 103);
   justify-self: flex-end;
   margin: 5px 0;
+}
+
+.btnWrapper {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+}
+
+.limitCheckboxLabel {
+  font-size: 16px;
 }
 
 .reportTitle {
@@ -40,6 +50,7 @@
 
 .reportItemTitle {
   margin: 0;
+  padding: 0;
 }
 
 .reportItem {
@@ -72,15 +83,23 @@
 
 .infoRelic {
   width: 55px;
-  margin: 0 5px 0 0;
-  text-align: center;
+  margin: 0;
+  /* margin: 0 5px 0 0; */
+  text-align: right;
 }
 
 .infoRarity {
   width: 55px;
-  margin: 0 5px 0 0;
+  margin: 0;
+  /* margin: 0 5px 0 0; */
   color: rgb(106, 103, 103);
-  text-align: center;
+  text-align: right;
+}
+
+.infoOmic {
+  width: 15px;
+  margin: 0 10px 0 0;
+  text-align: right;
 }
 
 .infoName {

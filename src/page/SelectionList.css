@@ -46,7 +46,7 @@
 }
 
 .selections {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   /* border: 1px solid gray; */
@@ -56,12 +56,15 @@
 }
 
 .selection {
-  /* width: 100%; */
+  width: 100%;
   display: flex;
-  margin: 3px;
+  /* margin: 3px; */
   padding: 2px;
+  box-sizing: border-box;
   border-radius: 10px;
   background-color: rgb(153, 150, 150);
+  /* overflow: ; */
+  /* flex-wrap: wrap; */
 }
 
 .checkedSelection {
@@ -76,6 +79,8 @@
 
 .selectionItems {
   display: flex;
+  flex-wrap: wrap;
+
   /* border: 1px solid yellow; */
 }
 .selectionItem {
@@ -87,5 +92,21 @@
   width: 45px;
   height: 45px;
   border-radius: 5px;
-  margin: 0 2px;
+  margin: 2px 2px;
+}
+
+.selectionItemDeleteImage {
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  margin: 2px 2px;
+  cursor: pointer;
+  z-index: 1;
+  background-color: black;
+  transition: 0.5s;
+}
+
+.selectionItemDeleteImage:hover {
+  transform: scale(1.1);
+  background-color: rgb(80, 1, 1);
 }

@@ -104,7 +104,7 @@ export default {
       // this.data.selections = JSON.parse(localStorage.getItem('groups'))
       // console.log(this.data.selections)
 
-      this.$store.dispatch('selections')
+      // this.$store.dispatch('selections')
       // console.log(this.GET_SELECTIONS)
       // this.$refs.charListSelections.classList.add('open')
     },

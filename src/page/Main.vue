@@ -22,14 +22,15 @@ export default {
   },
 
   created () {
-    this.fetchGetAllChars()
-  },
-
-  methods: {
-    fetchGetAllChars () {
-      this.$store.dispatch('getAllChars')
-    }
+    // this.fetchGetAllChars()
+    // this.$store.dispatch('getAllChars')
   }
+
+  // methods: {
+  //   fetchGetAllChars () {
+  //     this.$store.dispatch('getAllChars')
+  //   }
+  // }
 }
 </script>
 

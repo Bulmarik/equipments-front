@@ -17,6 +17,7 @@
             <div v-for="item in selection.chars" :key="item.id">
               <img class="selectionItemImage" :src="item.image" alt="иконка юнита">
             </div>
+            <img class="selectionItemDeleteImage" src="../images/216658.png" alt="иконка удалить" @click="deleteSelectoin(selection.id)">
           </div>
         </li>
       </ul>
@@ -35,35 +36,35 @@ export default {
       checkedSelections: []
     }
   },
-  // created: {
-  //   getSelections () {
-  //     return this.$store.state.sw.selections
-  //   }
-  // },
+
+  mounted () {
+    this.$store.dispatch('selections')
+  },
 
   computed: {
     ...mapGetters([
       'GET_SELECTIONS'
     ])
   },
+
   methods: {
     isChecked (selection) {
-      // const id = 'qwe_' + selection.id
       document.getElementById('selection_' + selection.id).classList.toggle('checkedSelection')
-
       const index = this.checkedSelections.findIndex((c) => c === selection.id)
       if (index !== -1) {
         this.checkedSelections.splice(index, 1)
       } else {
         this.checkedSelections.push(selection.id)
       }
-      // console.log(this.checkedSelections)
-      // this.$store.commit('SET_SELECTED_SELECTION', selection.id)
     },
     setSelectSelection () {
       this.$store.commit('SET_SELECTED_SELECTION', this.checkedSelections)
-      // document.getElementById('selection_' + item.id).classList.toggle('checkedSelection')
-      // console.log('жопы')
+    },
+    deleteSelectoin (selection) {
+      this.$store.dispatch('deleteSelection', selection)
+        .then(response => {
+          this.$store.dispatch('selections')
+        })
     }
   }
 }
