@@ -7,7 +7,7 @@
         <button class="searchBtn" @click.prevent="search('searchByChars')">Поиск по персонажам</button>
         <label class="limitCheckboxLabel">
           <input type="checkbox" class="limitCheckbox" id="limitCheckbox">
-          менее чем у 10 игроков
+          показать только редкие
         </label>
       </div>
     </div>
