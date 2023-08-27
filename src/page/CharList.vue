@@ -1,14 +1,16 @@
 <template>
   <div class="charList">
-    <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
-    <button class="charListBtn charListBtnCreateSelection" @click="openInput">Создать подборку</button>
-    <router-link :to="{ name: 'SelectionList' }">
-        <button class="charListBtn charListBtnSelections" @click="openSelections">Подборки</button>
-        <!-- <button class="charListBtn charListBtnSelections">Подборки</button> -->
-    </router-link>
-    <router-link :to="{ name: 'Main' }">
-      <button class="charListBtn charListBtnOk">Ок</button>
-    </router-link>
+    <div class="charListButtons">
+      <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
+      <button class="charListBtn charlistBtnFrations">Фракции</button>
+      <button class="charListBtn charListBtnCreateSelection" @click="openInput">Создать подборку</button>
+      <router-link :to="{ name: 'SelectionList' }">
+          <button class="charListBtn charListBtnSelections" @click="openSelections">Подборки</button>
+      </router-link>
+      <router-link :to="{ name: 'Main' }">
+        <button class="charListBtn charListBtnOk">Ок</button>
+      </router-link>
+    </div>
     <div class="charListContent">
       <h2 class="charListTitle">Персонажи</h2>
       <div class="charListGrid">
@@ -27,7 +29,6 @@
           <label class="charListItemLabel">
             <img class="charListItemIcon" :src="char.image" alt="иконка корабля">
             <div class="charListItemLabelBox">
-              <!-- <input class="charListItemCheckbox" @input="setSelectedChar(char)" type="checkbox" :id="'checkbox_' + char.id"> -->
               {{ char.name_ru }}
             </div>
           </label>
@@ -42,11 +43,28 @@
         <button class="charListBtn charListBtnSave" @click.prevent="saveSelection">Сохранить</button>
       </form>
     </div>
+    <div class="charListPopup">
+      <div class="XcharListCreateOverlay">
+        <div class="charListPopupContainer"></div>
+        <div class="XcharListButtons">
+          <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
+          <button class="charListBtn charListBtnOk">Ок</button>
+        </div>
+        <div class="charListCategories">
+          <div class="charListGeneralCategory" v-for="category in GENERAL_CATEGORIES" :key="category.id" :id="category.id">
+            {{ category }}
+          </div>
+          <div class="charListCategory" v-for="category in ALL_CATEGORIES" :key="category.id" :id="category.id">
+            {{ category }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 // import clearList from '../components/ClearList/ClearList.mjs'
 
 export default {
@@ -54,19 +72,25 @@ export default {
 
   data () {
     return {
-      groupName: ''
+      groupName: '',
+      fraction: []
     }
   },
 
   mounted () {
     this.$store.dispatch('getAllChars')
+      .then(response => {
+        // console.log(this.GET_ALL_CHARS)
+      })
   },
 
   computed: {
     ...mapGetters([
       'GET_ALL_CHARS',
       'GET_SELECTED_CHARS',
-      'GET_SELECTIONS'
+      'GET_SELECTIONS',
+      'ALL_CATEGORIES',
+      'GENERAL_CATEGORIES'
     ])
   },
 
@@ -82,6 +106,9 @@ export default {
       this.$store.commit('SET_SELECTED_CHARS', 'clear')
       this.$store.commit('SET_SEARCH_PARAM_CHARS', 'clear')
       this.$store.commit('SET_SEARCH_RESULT', '[]')
+    },
+
+    openFraction () {
     },
 
     openInput () {

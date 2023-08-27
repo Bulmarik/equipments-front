@@ -11,7 +11,9 @@ export default {
     searchResult: [],
     selections: {},
     selectedSelections: [],
-    charCount: {}
+    charCount: {},
+    allCategories: [],
+    generalCategories: ['Galactic Legend', 'Leader', 'Healer', 'Attacker', 'Support', 'Tank', 'Capital Ship', 'Cargo Ship', 'Fleet Commander']
   },
 
   mutations: {
@@ -22,6 +24,31 @@ export default {
         if (a.name_ru > b.name_ru) return 1
         return 0
       })
+      // function cat (c) {
+      //   c.forEach((el) => {
+      //     return el
+      //   })
+      // }
+      // console.log(cat(state.disableCategories))
+      const categories = payload.data.reduce((acc, item) => {
+        item.categories.forEach((category) => {
+          // state.disableCategories.forEach((el) => {
+          //   console.log(el)
+          // })
+          if (!state.generalCategories.some(cat => cat === category)) {
+            if (!acc.includes(category)) {
+              acc.push(category)
+            }
+          }
+        })
+        return acc
+      }, [])
+      state.allCategories = categories.sort((a, b) => {
+        if (a < b) return -1
+        if (a > b) return 1
+        return 0
+      })
+      // console.log(state.allCategories)
     },
 
     // Выбранные персонажи
@@ -83,13 +110,8 @@ export default {
         checkedSelection.chars.forEach(char => {
           const charExists = state.selectedChars.find(selectedChar => selectedChar.id * 1 === char.id * 1)
           if (!charExists) {
-            // console.log(char)
             state.selectedChars.push(char)
             state.searchParam.ids.push(char.id)
-          } else {
-            // state.charCount[char.id] = 0
-            // const charCount = state.charCount[char.id]
-            // console.log(charCount)
           }
         })
       })
@@ -98,6 +120,9 @@ export default {
         if (a.name_ru > b.name_ru) return 1
         return 0
       })
+    },
+
+    SET_ALL_CATEGORIES (state, payload) {
     }
   },
 
@@ -152,6 +177,12 @@ export default {
     },
     GET_SELECTIONS (state) {
       return state.selections
+    },
+    ALL_CATEGORIES (state) {
+      return state.allCategories
+    },
+    GENERAL_CATEGORIES (state) {
+      return state.generalCategories
     }
   }
 }
