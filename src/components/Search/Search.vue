@@ -14,10 +14,12 @@
       <button class="charSelectButton">полный список доступных персонажей</button>
     </router-link>
   </div>
-  <div class="searchChar" v-for="char in GET_SELECTED_CHARS" :key="char.id">
+  <div class="searchChar" v-for="unit in GET_SELECTED_UNITS" :key="unit.id">
     <label>
-      <input type="checkbox" @input="select(char.id)" :id="'checkbox_' + char.id" :checked="checked(char.id, 'ids')"/>
-      {{ char.name_ru }}
+      <input type="checkbox" @input="select(unit)" :id="'checkbox_' + unit.id" :checked="checked(unit.id, 'ids')"/>
+      <!-- <input type="checkbox" @input="select(char)" :id="'checkbox_' + char.id" :checked="checked()"/> -->
+      <!-- <input type="checkbox" :id="'checkbox_' + char.id" :checked="checked()"/> -->
+      {{ unit.name_ru }}
     </label>
   </div>
 </div>
@@ -31,32 +33,34 @@ export default {
 
   computed: {
     ...mapGetters([
-      'GET_SELECTED_CHARS',
-      'GET_SEARCH_PARAM'
+      'GET_SELECTED_UNITS',
+      'GET_SEARCH_UNITS'
     ])
   },
 
   methods: {
     select (item) {
-      this.$store.commit('SET_SEARCH_PARAM_CHARS', item)
+      // console.log(item)
+      this.$store.commit('SET_SEARCH_UNIT', item)
     },
 
     selectRel (item) {
-      this.$store.commit('SET_SEARCH_PARAM_REL', item.target.value)
+      this.$store.commit('SET_SEARCH_REL', item.target.value)
     },
 
     clearList () {
       const checkedChar = document.querySelectorAll('.checked')
       checkedChar.forEach(el => el.classList.remove('checked'))
-      this.$store.commit('SET_SELECTED_CHARS', 'clear')
-      this.$store.commit('SET_SEARCH_PARAM_CHARS', 'clear')
+      this.$store.commit('SET_SELECTED_UNITS', 'clear')
+      this.$store.commit('SET_SEARCH_UNIT', 'clear')
       this.$store.commit('SET_SEARCH_RESULT', '[]')
     },
+
     checked (value, param) {
       if (param === 'ids') {
-        return this.GET_SEARCH_PARAM[param].find(item => item === value)
+        return this.GET_SEARCH_UNITS[param].find(item => item === value)
       } else {
-        return Number(this.GET_SEARCH_PARAM[param]) === value
+        return Number(this.GET_SEARCH_UNITS[param]) === value
       }
     }
   }

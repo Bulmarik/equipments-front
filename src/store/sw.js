@@ -2,39 +2,33 @@ import { apiClient } from '../services/api'
 
 export default {
   state: {
-    allChars: {},
-    selectedChars: [],
-    searchParam: {
+    allUnits: {},
+    selectedUnits: [],
+    searchChar: {
       ids: [],
       rel: null
+    },
+    searchShip: {
+      ids: [],
+      rel: 0
     },
     searchResult: [],
     selections: {},
     selectedSelections: [],
-    charCount: {},
     allCategories: [],
     generalCategories: ['Galactic Legend', 'Leader', 'Healer', 'Attacker', 'Support', 'Tank', 'Capital Ship', 'Cargo Ship', 'Fleet Commander']
   },
 
   mutations: {
     // Полный список персонажей в алфавитном порядке
-    SET_ALL_CHARS (state, payload) {
-      state.allChars = payload.data.sort((a, b) => {
+    SET_ALL_UNITS (state, payload) {
+      state.allUnits = payload.data.sort((a, b) => {
         if (a.name_ru < b.name_ru) return -1
         if (a.name_ru > b.name_ru) return 1
         return 0
       })
-      // function cat (c) {
-      //   c.forEach((el) => {
-      //     return el
-      //   })
-      // }
-      // console.log(cat(state.disableCategories))
       const categories = payload.data.reduce((acc, item) => {
         item.categories.forEach((category) => {
-          // state.disableCategories.forEach((el) => {
-          //   console.log(el)
-          // })
           if (!state.generalCategories.some(cat => cat === category)) {
             if (!acc.includes(category)) {
               acc.push(category)
@@ -48,59 +42,64 @@ export default {
         if (a > b) return 1
         return 0
       })
-      // console.log(state.allCategories)
     },
 
-    // Выбранные персонажи
-    SET_SELECTED_CHARS (state, payload) {
+    // Выбранные юниты
+    SET_SELECTED_UNITS (state, payload) {
       if (payload === 'clear') {
-        state.selectedChars = []
+        state.selectedUnits = []
       } else {
-        const index = state.selectedChars.findIndex((c) => c.id === payload.id)
+        const index = state.selectedUnits.findIndex((c) => c.id === payload.id)
         if (index !== -1) {
-          state.selectedChars.splice(index, 1)
+          state.selectedUnits.splice(index, 1)
         } else {
-          state.selectedChars.push(payload)
+          state.selectedUnits.push(payload)
         }
       }
-      state.selectedChars = state.selectedChars.sort((a, b) => {
+      state.selectedUnits = state.selectedUnits.sort((a, b) => {
         if (a.name_ru < b.name_ru) return -1
         if (a.name_ru > b.name_ru) return 1
         return 0
       })
     },
 
-    // Искомые персонажи
-    SET_SEARCH_PARAM_CHARS (state, payload) {
+    // Искомые юниты
+    SET_SEARCH_UNIT (state, payload) {
       if (payload === 'clear') {
-        state.searchParam.ids = []
+        state.searchChar.ids = []
+        state.searchShip.ids = []
       } else {
-        // console.log(state.searchParam.ids)
-        // console.log(payload)
-        const index = state.searchParam.ids.findIndex((c) => c === payload)
-        if (index !== -1) {
-          state.searchParam.ids.splice(index, 1)
+        if (payload.type === 'char') {
+          const index = state.searchChar.ids.findIndex((c) => c === payload.id)
+          if (index !== -1) {
+            state.searchChar.ids.splice(index, 1)
+          } else {
+            state.searchChar.ids.push(payload.id)
+          }
         } else {
-          state.searchParam.ids.push(payload)
+          const index = state.searchShip.ids.findIndex((c) => c === payload.id)
+          if (index !== -1) {
+            state.searchShip.ids.splice(index, 1)
+          } else {
+            state.searchShip.ids.push(payload.id)
+          }
         }
       }
     },
 
     // Уровень реликтов искомых персонажей
-    SET_SEARCH_PARAM_REL (state, payload) {
-      state.searchParam.rel = payload
+    SET_SEARCH_REL (state, payload) {
+      state.searchChar.rel = payload
     },
 
     // Результаты поиска
     SET_SEARCH_RESULT (state, payload) {
-      state.searchResult = payload.data
+      state.searchResult = payload
     },
 
     // Подборки
     SET_SELECTIONS (state, payload) {
-      // console.log('payload.data в мутации')
       state.selections = payload.data
-      // console.log(state.selections)
     },
 
     // Выбранные подборки
@@ -108,69 +107,106 @@ export default {
       const checkedSelections = state.selections.filter(selection => payload.includes(selection.id))
       checkedSelections.forEach(checkedSelection => {
         checkedSelection.chars.forEach(char => {
-          const charExists = state.selectedChars.find(selectedChar => selectedChar.id * 1 === char.id * 1)
+          const charExists = state.selectedUnits.find(selectedChar => selectedChar.id * 1 === char.id * 1)
           if (!charExists) {
-            state.selectedChars.push(char)
-            state.searchParam.ids.push(char.id)
+            state.selectedUnits.push(char)
+            if (char.type === 'char') {
+              const index = state.searchChar.ids.findIndex((c) => c === char.id)
+              if (index === -1) {
+                state.searchChar.ids.push(char.id)
+              }
+            } else {
+              const index = state.searchShip.ids.findIndex((c) => c === char.id)
+              if (index === -1) {
+                state.searchShip.ids.push(char.id)
+              }
+            }
           }
         })
       })
-      state.selectedChars = state.selectedChars.sort((a, b) => {
+      state.selectedUnits = state.selectedUnits.sort((a, b) => {
         if (a.name_ru < b.name_ru) return -1
         if (a.name_ru > b.name_ru) return 1
         return 0
       })
-    },
-
-    SET_ALL_CATEGORIES (state, payload) {
     }
   },
 
   actions: {
-    async getAllChars ({commit}) {
+    // Получение списка всех юнитов
+    async getAllUnits ({commit}) {
       const { data } = await apiClient.get('/list-chars')
-      commit('SET_ALL_CHARS', data)
+      commit('SET_ALL_UNITS', data)
     },
+
+    // Поиск по игрокам - !!! объединить массивы результатов
     async searchByMembers ({commit, state}) {
-      let param = JSON.stringify(state.searchParam)
-      const { data } = await apiClient.post('/search-data', param)
+      // let param = JSON.stringify(state.searchChar)
+      // const { data } = await apiClient.post('/search-data', param)
+      let charParam = JSON.stringify(state.searchChar)
+      let shipParam = JSON.stringify(state.searchShip)
+      const charData = await apiClient.post('/search-data', charParam)
+      const shipData = await apiClient.post('/search-data', shipParam)
+      // const data = [...charData.data.data, ...shipData.data.data]
+      // console.log(charData.data.data)
+      // console.log(shipData.data.data)
+      charData.data.data.forEach(item => {
+        const elem = shipData.data.data.find(el => el.name === item.name)
+        if (elem) {
+          item.info = item.info.concat(elem.info)
+        }
+      })
+      // console.log(charData.data.data)
+      commit('SET_SEARCH_RESULT', charData.data.data)
+      // commit('SET_SEARCH_RESULT', data)
+    },
+
+    // Поиск по персонажам
+    async searchByUnits ({commit, state}) {
+      let charParam = JSON.stringify(state.searchChar)
+      let shipParam = JSON.stringify(state.searchShip)
+      const charData = await apiClient.post('/search-data-by-char', charParam)
+      const shipData = await apiClient.post('/search-data-by-char', shipParam)
+      const data = [...charData.data.data, ...shipData.data.data]
       commit('SET_SEARCH_RESULT', data)
     },
-    async searchByChars ({commit, state}) {
-      let param = JSON.stringify(state.searchParam)
-      const { data } = await apiClient.post('/search-data-by-char', param)
-      commit('SET_SEARCH_RESULT', data)
-    },
+
+    // Сохранение подборки
     async saveSelection ({state}, param) {
       let selection = {
         name: param,
-        ids: state.selectedChars.map(el => el.id)
+        ids: state.selectedUnits.map(el => el.id)
       }
       const { data } = await apiClient.post('/group', JSON.stringify(selection))
-      // console.log(data)
       return data
     },
+
+    // Получение списка созданных подборок
     async selections ({commit}) {
-      // console.log('пошел запрос')
       const { data } = await apiClient.get('/group')
       commit('SET_SELECTIONS', data)
     },
+
+    // Удаление подборки
     async deleteSelection ({state}, param) {
-      // console.log('асинк ' + param)
       const { data } = await apiClient.delete('/group/' + param)
       return data
     }
   },
 
   getters: {
-    GET_ALL_CHARS (state) {
-      return state.allChars
+    GET_ALL_UNITS (state) {
+      return state.allUnits
     },
-    GET_SELECTED_CHARS (state) {
-      return state.selectedChars
+    GET_SELECTED_UNITS (state) {
+      return state.selectedUnits
     },
-    GET_SEARCH_PARAM (state) {
-      return state.searchParam
+    GET_SEARCH_UNITS (state) {
+      const searchUnits = {
+        ids: [...state.searchChar.ids, ...state.searchShip.ids],
+        rel: state.searchChar.rel
+      }
+      return searchUnits
     },
     GET_SEARCH_RESULT (state) {
       return state.searchResult

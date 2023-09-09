@@ -14,7 +14,7 @@
     <div class="charListContent">
       <h2 class="charListTitle">Персонажи</h2>
       <div class="charListGrid">
-        <div class="charListItem" :class="checked(char)" v-for="char in GET_ALL_CHARS" :key="char.id" :id="char.id" v-if="char.type === 'char'" @click="setSelectedChar(char)">
+        <div class="charListItem" :class="checked(char)" v-for="char in GET_ALL_UNITS" :key="char.id" :id="char.id" v-if="char.type === 'char'" @click="setSelectedChar(char)">
             <label class="charListItemLabel">
               <img class="charListItemIcon" :src="char.image" alt="иконка перса">
               <div class="charListItemLabelBox">
@@ -25,7 +25,7 @@
       </div>
       <h2 class="charListTitle">Корабли</h2>
       <div class="charListGrid">
-        <div class="charListItem" :class="checked(char)" v-for="char in GET_ALL_CHARS" :key="char.id" :id="char.id" v-if="char.type === 'ship'" @click="setSelectedChar(char)">
+        <div class="charListItem" :class="checked(char)" v-for="char in GET_ALL_UNITS" :key="char.id" :id="char.id" v-if="char.type === 'ship'" @click="setSelectedChar(char)">
           <label class="charListItemLabel">
             <img class="charListItemIcon" :src="char.image" alt="иконка корабля">
             <div class="charListItemLabelBox">
@@ -43,7 +43,7 @@
         <button class="charListBtn charListBtnSave" @click.prevent="saveSelection">Сохранить</button>
       </form>
     </div>
-    <div class="charListPopup">
+    <div class="charListCategory" ref="charListCategory">
       <div class="XcharListCreateOverlay">
         <div class="charListPopupContainer"></div>
         <div class="XcharListButtons">
@@ -78,16 +78,16 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('getAllChars')
+    this.$store.dispatch('getAllUnits')
       .then(response => {
-        // console.log(this.GET_ALL_CHARS)
+        // console.log(this.GET_ALL_UNITS)
       })
   },
 
   computed: {
     ...mapGetters([
-      'GET_ALL_CHARS',
-      'GET_SELECTED_CHARS',
+      'GET_ALL_UNITS',
+      'GET_SELECTED_UNITS',
       'GET_SELECTIONS',
       'ALL_CATEGORIES',
       'GENERAL_CATEGORIES'
@@ -97,14 +97,14 @@ export default {
   methods: {
     setSelectedChar (item) {
       this.isChecked(item)
-      this.$store.commit('SET_SELECTED_CHARS', item)
+      this.$store.commit('SET_SELECTED_UNITS', item)
     },
 
     clearList () {
       const checkedChar = document.querySelectorAll('.checked')
       checkedChar.forEach(el => el.classList.remove('checked'))
-      this.$store.commit('SET_SELECTED_CHARS', 'clear')
-      this.$store.commit('SET_SEARCH_PARAM_CHARS', 'clear')
+      this.$store.commit('SET_SELECTED_UNITS', 'clear')
+      this.$store.commit('SET_SEARCH_UNIT', 'clear')
       this.$store.commit('SET_SEARCH_RESULT', '[]')
     },
 
@@ -151,7 +151,7 @@ export default {
     },
 
     checked (char) {
-      return this.GET_SELECTED_CHARS.find(item => item.id * 1 === char.id * 1) ? 'checked' : ''
+      return this.GET_SELECTED_UNITS.find(item => item.id * 1 === char.id * 1) ? 'checked' : ''
     }
   }
 }

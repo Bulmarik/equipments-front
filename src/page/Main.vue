@@ -22,13 +22,13 @@ export default {
   },
 
   created () {
-    // this.fetchGetAllChars()
-    // this.$store.dispatch('getAllChars')
+    // this.fetchGetallUnits()
+    // this.$store.dispatch('getAllUnits')
   }
 
   // methods: {
-  //   fetchGetAllChars () {
-  //     this.$store.dispatch('getAllChars')
+  //   fetchGetallUnits () {
+  //     this.$store.dispatch('getAllUnits')
   //   }
   // }
 }
