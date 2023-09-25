@@ -6,18 +6,20 @@
       <div class="btnWrapper">
         <button class="searchBtn" @click.prevent="search('searchByUnits')">Поиск по персонажам</button>
         <label class="limitCheckboxLabel">
-          <input type="checkbox" class="limitCheckbox" v-model="lengthLimit" v-bind:true-value="20" v-bind:false-value="50">
+          <input type="checkbox" class="limitCheckbox" v-model="lengthLimit" v-bind:true-value="10" v-bind:false-value="50">
           показать только редкие
         </label>
       </div>
     </div>
     <ul class="reportList">
       <h4 class="reportItemTitle">{{ titleText }}</h4>
-      <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="!isNaN(item.external_id) || item.info.length < lengthLimit">
+      <!-- !!!разобраться!!! -->
+      <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="!isNaN(item.external_id) || (item.info && item.info.length < lengthLimit)">
         <h3 class="reportItemName"> {{ item.name_ru }} {{ isNaN(item.external_id) && item.info.length > 1 ? `[${item.info.length}]` : ''}}</h3>
+        <!-- <h3 class="reportItemName"> {{ item.name_ru }}</h3> -->
         <ul class="reportItemInfo">
           <li class="infoElement" v-for="element in item.info" :key="element.id">
-            <p class="infoRelic" v-if="element.pivot.rel !== null">{{ element.pivot.rel }}р</p>
+            <p class="infoRelic" v-if="element.pivot.rel !== null">{{ element.pivot.rel + 'р' }}</p>
             <p class="infoRarity" v-else>{{ element.pivot.rarity + '*' }}{{ element.pivot.tir !== 1 ? element.pivot.tir + 'т' : ''}}</p>
             <p class="infoOmic">{{ element.pivot.ability_data.length >= 3 ? 'O' : '' }}</p>
             <p class="infoName">{{ element.name_ru }}</p>

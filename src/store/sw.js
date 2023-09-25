@@ -56,7 +56,7 @@ export default {
           state.selectedUnits.push(payload)
         }
       }
-      state.selectedUnits = state.selectedUnits.sort((a, b) => {
+      state.selectedUnits.sort((a, b) => {
         if (a.name_ru < b.name_ru) return -1
         if (a.name_ru > b.name_ru) return 1
         return 0
@@ -94,7 +94,16 @@ export default {
 
     // Результаты поиска
     SET_SEARCH_RESULT (state, payload) {
-      state.searchResult = payload
+      state.searchResult = payload.sort((a, b) => {
+        if (a.name_ru < b.name_ru) return -1
+        if (a.name_ru > b.name_ru) return 1
+        return 0
+      })
+      state.searchResult.forEach(el => el.info.sort((a, b) => {
+        if (a.name_ru.toLowerCase() < b.name_ru.toLowerCase()) return -1
+        if (a.name_ru.toLowerCase() > b.name_ru.toLowerCase()) return 1
+        return 0
+      }))
     },
 
     // Подборки
@@ -124,7 +133,7 @@ export default {
           }
         })
       })
-      state.selectedUnits = state.selectedUnits.sort((a, b) => {
+      state.selectedUnits.sort((a, b) => {
         if (a.name_ru < b.name_ru) return -1
         if (a.name_ru > b.name_ru) return 1
         return 0
