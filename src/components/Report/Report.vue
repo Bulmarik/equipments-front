@@ -1,20 +1,26 @@
 <template>
   <div class="report">
     <div class="reportHeader">
-      <button class="searchBtn" @click.prevent="search('searchByMembers')">Поиск по игрокам</button>
+      <div class="btnWrapper">
+        <button class="searchBtn" @click.prevent="search('searchByMembers')">Поиск по игрокам</button>
+        <label class="checkboxLabel">
+          <input type="checkbox" class="fullСoincidenceCheckbox" v-model="searchUnitsLength" v-bind:true-value=GET_SEARCH_UNITS.ids.length v-bind:false-value="0">
+          только полные совпадения
+        </label>
+      </div>
       <h2 class="title reportTitle">Отчет</h2>
       <div class="btnWrapper">
         <button class="searchBtn" @click.prevent="search('searchByUnits')">Поиск по персонажам</button>
-        <label class="limitCheckboxLabel">
+        <label class="checkboxLabel">
           <input type="checkbox" class="limitCheckbox" v-model="lengthLimit" v-bind:true-value="10" v-bind:false-value="50">
-          показать только редкие
+          только малочисленные
         </label>
       </div>
     </div>
     <ul class="reportList">
       <h4 class="reportItemTitle">{{ titleText }}</h4>
       <!-- !!!разобраться!!! -->
-      <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="!isNaN(item.external_id) || (item.info && item.info.length < lengthLimit)">
+      <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="(!isNaN(item.external_id) || (item.info && item.info.length < lengthLimit)) && (item.info && item.info.length >= searchUnitsLength)">
         <h3 class="reportItemName"> {{ item.name_ru }} {{ isNaN(item.external_id) && item.info.length > 1 ? `[${item.info.length}]` : ''}}</h3>
         <!-- <h3 class="reportItemName"> {{ item.name_ru }}</h3> -->
         <ul class="reportItemInfo">
@@ -39,12 +45,14 @@ export default {
   data () {
     return {
       titleText: '',
-      lengthLimit: '50'
+      lengthLimit: '50',
+      searchUnitsLength: '0'
     }
   },
 
   computed: {
     ...mapGetters([
+      'GET_SEARCH_UNITS',
       'GET_SEARCH_RESULT'
     ])
   },
