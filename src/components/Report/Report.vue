@@ -9,10 +9,13 @@
         </label>
       </div>
       <h2 class="title reportTitle">Отчет</h2>
+      {{ lengthLimit }}
       <div class="btnWrapper">
         <button class="searchBtn" @click.prevent="search('searchByUnits')">Поиск по персонажам</button>
         <label class="checkboxLabel">
           <input type="checkbox" class="limitCheckbox" v-model="lengthLimit" v-bind:true-value="10" v-bind:false-value="50">
+          <!-- Переделать -->
+          <!-- <input type="checkbox" class="limitCheckbox" v-model="lengthLimit"> -->
           только малочисленные
         </label>
       </div>
@@ -45,8 +48,10 @@ export default {
   data () {
     return {
       titleText: '',
-      lengthLimit: '50',
-      searchUnitsLength: '0'
+      lengthLimit: 50,
+      // Переделать
+      // lengthLimit: false,
+      searchUnitsLength: 0
     }
   },
 

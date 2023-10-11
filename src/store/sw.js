@@ -95,8 +95,8 @@ export default {
     // Результаты поиска
     SET_SEARCH_RESULT (state, payload) {
       state.searchResult = payload.sort((a, b) => {
-        if (a.name_ru < b.name_ru) return -1
-        if (a.name_ru > b.name_ru) return 1
+        if (a.name_ru.toLowerCase() < b.name_ru.toLowerCase()) return -1
+        if (a.name_ru.toLowerCase() > b.name_ru.toLowerCase()) return 1
         return 0
       })
       state.searchResult.forEach(el => el.info.sort((a, b) => {
@@ -142,14 +142,20 @@ export default {
   },
 
   actions: {
+    clearList ({ commit }) {
+      commit('SET_SELECTED_UNITS', 'clear')
+      commit('SET_SEARCH_UNIT', 'clear')
+      commit('SET_SEARCH_RESULT', [])
+    },
+
     // Получение списка всех юнитов
-    async getAllUnits ({commit}) {
+    async getAllUnits ({ commit }) {
       const { data } = await apiClient.get('/list-chars')
       commit('SET_ALL_UNITS', data)
     },
 
     // Поиск по игрокам - !!! объединить массивы результатов
-    async searchByMembers ({commit, state}) {
+    async searchByMembers ({ commit, state }) {
       // let param = JSON.stringify(state.searchChar)
       // const { data } = await apiClient.post('/search-data', param)
       let charParam = JSON.stringify(state.searchChar)
@@ -171,7 +177,7 @@ export default {
     },
 
     // Поиск по персонажам
-    async searchByUnits ({commit, state}) {
+    async searchByUnits ({ commit, state }) {
       let charParam = JSON.stringify(state.searchChar)
       let shipParam = JSON.stringify(state.searchShip)
       const charData = await apiClient.post('/search-data-by-char', charParam)
@@ -181,7 +187,7 @@ export default {
     },
 
     // Сохранение подборки
-    async saveSelection ({state}, param) {
+    async saveSelection ({ state }, param) {
       let selection = {
         name: param,
         ids: state.selectedUnits.map(el => el.id)
@@ -191,14 +197,22 @@ export default {
     },
 
     // Получение списка созданных подборок
-    async selections ({commit}) {
+    async selections ({ commit }) {
       const { data } = await apiClient.get('/group')
       commit('SET_SELECTIONS', data)
     },
 
     // Удаление подборки
-    async deleteSelection ({state}, param) {
+    async deleteSelection ({ state }, param) {
       const { data } = await apiClient.delete('/group/' + param)
+      return data
+    },
+
+    // Обновление инфы гильды
+    async updateInfo () {
+      console.log('Жопа')
+      const { data } = await apiClient.post('/load-data')
+      console.log(data)
       return data
     }
   },

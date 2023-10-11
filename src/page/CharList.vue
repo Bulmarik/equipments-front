@@ -1,7 +1,7 @@
 <template>
   <div class="charList">
     <div class="charListButtons">
-      <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
+      <button class="charListBtn charListBtnReset" @click="clearList2">Сброс</button>
       <button class="charListBtn charlistBtnFrations">Фракции</button>
       <button class="charListBtn charListBtnCreateSelection" @click="openInput">Создать подборку</button>
       <router-link :to="{ name: 'SelectionList' }">
@@ -47,7 +47,7 @@
       <div class="XcharListCreateOverlay">
         <div class="charListPopupContainer"></div>
         <div class="XcharListButtons">
-          <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
+          <button class="charListBtn charListBtnReset" @click="clearList2">Сброс</button>
           <button class="charListBtn charListBtnOk">Ок</button>
         </div>
         <div class="charListCategories">
@@ -66,9 +66,12 @@
 <script>
 import { mapGetters } from 'vuex'
 // import clearList from '../components/ClearList/ClearList.mjs'
+import clearList from '../utils/clearList.mjs'
 
 export default {
   name: 'CharList',
+
+  mixins: [clearList],
 
   data () {
     return {
@@ -101,12 +104,14 @@ export default {
       this.$store.commit('SET_SEARCH_UNIT', item)
     },
 
-    clearList () {
+    clearList2 () {
+      this.clearList123()
+      // this.$store.dispatch('clearList')
       // const checkedChar = document.querySelectorAll('.checked')
       // checkedChar.forEach(el => el.classList.remove('checked'))
-      this.$store.commit('SET_SELECTED_UNITS', 'clear')
-      this.$store.commit('SET_SEARCH_UNIT', 'clear')
-      this.$store.commit('SET_SEARCH_RESULT', '[]')
+      // this.$store.commit('SET_SELECTED_UNITS', 'clear')
+      // this.$store.commit('SET_SEARCH_UNIT', 'clear')
+      // this.$store.commit('SET_SEARCH_RESULT', [])
     },
 
     openFraction () {
