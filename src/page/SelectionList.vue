@@ -38,7 +38,7 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('selections')
+    this.$store.dispatch('getAllSelections')
   },
 
   computed: {

@@ -15,7 +15,6 @@ export default {
 
   methods: {
     updateInfo () {
-      console.log('йцу')
       this.$store.dispatch('updateInfo')
     }
   }

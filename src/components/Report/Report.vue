@@ -83,43 +83,6 @@ export default {
         }
       }
     }
-    // qwe () {
-    //   const arr1 = [
-    //     {
-    //       name: 'a',
-    //       key: [1, 2]
-    //     },
-    //     {
-    //       name: 'b',
-    //       key: [3, 4]
-    //     },
-    //     {
-    //       name: 'c',
-    //       key: [5, 6]
-    //     }
-    //   ]
-    //   const arr2 = [
-    //     {
-    //       name: 'd',
-    //       key: [7, 8]
-    //     },
-    //     {
-    //       name: 'a',
-    //       key: [9, 10]
-    //     },
-    //     {
-    //       name: 'c',
-    //       key: [11, 12]
-    //     }
-    //   ]
-    //   arr1.forEach(item => {
-    //     const asd = arr2.find(elem => elem.name === item.name)
-    //     if (asd) {
-    //       item.key = item.key.concat(asd.key)
-    //     }
-    //   })
-    //   console.log(arr1)
-    // }
   }
 }
 </script>

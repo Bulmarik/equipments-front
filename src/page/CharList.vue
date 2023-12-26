@@ -65,7 +65,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-// import clearList from '../components/ClearList/ClearList.mjs'
 import clearList from '../utils/clearList.mjs'
 
 export default {
@@ -82,9 +81,9 @@ export default {
 
   mounted () {
     this.$store.dispatch('getAllUnits')
-      .then(response => {
-        // console.log(this.GET_ALL_UNITS)
-      })
+    // .then(response => {
+    // console.log(this.GET_ALL_UNITS)
+    // })
   },
 
   computed: {

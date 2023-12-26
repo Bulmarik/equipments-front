@@ -197,7 +197,7 @@ export default {
     },
 
     // Получение списка созданных подборок
-    async selections ({ commit }) {
+    async getAllSelections ({ commit }) {
       const { data } = await apiClient.get('/group')
       commit('SET_SELECTIONS', data)
     },
@@ -210,7 +210,7 @@ export default {
 
     // Обновление инфы гильды
     async updateInfo () {
-      console.log('Жопа')
+      console.log('Обновление инфы...')
       const { data } = await apiClient.post('/load-data')
       console.log(data)
       return data

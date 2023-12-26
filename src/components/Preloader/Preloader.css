@@ -1,0 +1,53 @@
+@keyframes rotate-icon {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes rotate-text {
+  66%, 100% {
+    transform: perspective(500px) rotateY(360deg);
+  }
+}
+
+.preloader {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.preloader_overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.preloader_container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preloader_icon {
+  width: 25%;
+  animation: 3s linear infinite rotate-icon;
+}
+
+.preloader_text {
+  width: 30%;
+  animation: 9s ease infinite rotate-text 3s;
+}
+
+.preloader_title {
+  position: absolute;
+  inset: 0;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 50%;
+}
