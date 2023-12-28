@@ -5,7 +5,7 @@
     <Body/>
   </div>
   <Footer/>
-  <Preloader/>
+  <Preloader v-show="loading"/>
 </div>
 </template>
 <script>
@@ -27,18 +27,13 @@ export default {
   },
 
   created () {
-    // this.fetchGetallUnits()
-    // this.$store.dispatch('getAllUnits')
-  }
+    this.$store.dispatch('statusUpdateInfo')
+  },
 
-  // methods: {
-  //   fetchGetallUnits () {
-  //     this.$store.dispatch('getAllUnits')
-  //   }
-  // }
+  computed: {
+    loading () {
+      return this.$store.state.sw.preloaderVisibility
+    }
+  }
 }
 </script>
-
-<style scoped>
-
-</style>

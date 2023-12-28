@@ -1,11 +1,11 @@
 <template>
   <div class="charList">
     <div class="charListButtons">
-      <button class="charListBtn charListBtnReset" @click="clearList2">Сброс</button>
+      <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
       <button class="charListBtn charlistBtnFrations">Фракции</button>
       <button class="charListBtn charListBtnCreateSelection" @click="openInput">Создать подборку</button>
       <router-link :to="{ name: 'SelectionList' }">
-          <button class="charListBtn charListBtnSelections" @click="openSelections">Подборки</button>
+          <button class="charListBtn charListBtnSelections">Подборки</button>
       </router-link>
       <router-link :to="{ name: 'Main' }">
         <button class="charListBtn charListBtnOk">Ок</button>
@@ -65,12 +65,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import clearList from '../utils/clearList.mjs'
+import clear from '../mixins/clear.js'
 
 export default {
   name: 'CharList',
 
-  mixins: [clearList],
+  mixins: [clear],
 
   data () {
     return {
@@ -81,9 +81,6 @@ export default {
 
   mounted () {
     this.$store.dispatch('getAllUnits')
-    // .then(response => {
-    // console.log(this.GET_ALL_UNITS)
-    // })
   },
 
   computed: {
@@ -97,6 +94,10 @@ export default {
   },
 
   methods: {
+    clearList () {
+      this.clear()
+    },
+
     setSelectedChar (item) {
       this.isChecked(item)
       this.$store.commit('SET_SELECTED_UNITS', item)
@@ -105,12 +106,6 @@ export default {
 
     clearList2 () {
       this.clearList123()
-      // this.$store.dispatch('clearList')
-      // const checkedChar = document.querySelectorAll('.checked')
-      // checkedChar.forEach(el => el.classList.remove('checked'))
-      // this.$store.commit('SET_SELECTED_UNITS', 'clear')
-      // this.$store.commit('SET_SEARCH_UNIT', 'clear')
-      // this.$store.commit('SET_SEARCH_RESULT', [])
     },
 
     openFraction () {
@@ -131,25 +126,6 @@ export default {
         })
       this.closeInput()
     },
-
-    openSelections () {
-      // this.data.selections = JSON.parse(localStorage.getItem('groups'))
-      // console.log(this.data.selections)
-
-      // this.$store.dispatch('selections')
-      // console.log(this.GET_SELECTIONS)
-      // this.$refs.charListSelections.classList.add('open')
-    },
-
-    // closeSelections () {
-    //   this.$refs.charListSelections.classList.remove('open')
-    // },
-
-    // getSelection () {
-    //   let selections
-    //   selections = JSON.parse(localStorage.getItem('groups'))
-    //   return selections
-    // },
 
     isChecked (item) {
       document.getElementById(item.id).classList.toggle('checked')

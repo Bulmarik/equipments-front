@@ -11,6 +11,7 @@
 }
 
 .preloader {
+  /* display: none; */
   position: absolute;
   top: 0;
   width: 100vw;
@@ -51,3 +52,7 @@
   text-align: center;
   margin-top: 50%;
 }
+
+/* .visible {
+  display: block;
+} */

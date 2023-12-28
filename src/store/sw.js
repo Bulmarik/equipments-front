@@ -16,7 +16,8 @@ export default {
     selections: {},
     selectedSelections: [],
     allCategories: [],
-    generalCategories: ['Galactic Legend', 'Leader', 'Healer', 'Attacker', 'Support', 'Tank', 'Capital Ship', 'Cargo Ship', 'Fleet Commander']
+    generalCategories: ['Galactic Legend', 'Leader', 'Healer', 'Attacker', 'Support', 'Tank', 'Capital Ship', 'Cargo Ship', 'Fleet Commander'],
+    preloaderVisibility: false
   },
 
   mutations: {
@@ -138,6 +139,15 @@ export default {
         if (a.name_ru > b.name_ru) return 1
         return 0
       })
+    },
+
+    SET_STATUS_UPDATE_INFO (state, payload) {
+      // console.log(payload)
+      if (payload.status !== 'finish') {
+        state.preloaderVisibility = true
+      } else {
+        state.preloaderVisibility = false
+      }
     }
   },
 
@@ -154,26 +164,19 @@ export default {
       commit('SET_ALL_UNITS', data)
     },
 
-    // Поиск по игрокам - !!! объединить массивы результатов
+    // Поиск по игрокам
     async searchByMembers ({ commit, state }) {
-      // let param = JSON.stringify(state.searchChar)
-      // const { data } = await apiClient.post('/search-data', param)
       let charParam = JSON.stringify(state.searchChar)
       let shipParam = JSON.stringify(state.searchShip)
       const charData = await apiClient.post('/search-data', charParam)
       const shipData = await apiClient.post('/search-data', shipParam)
-      // const data = [...charData.data.data, ...shipData.data.data]
-      // console.log(charData.data.data)
-      // console.log(shipData.data.data)
       charData.data.data.forEach(item => {
         const elem = shipData.data.data.find(el => el.name === item.name)
         if (elem) {
           item.info = item.info.concat(elem.info)
         }
       })
-      // console.log(charData.data.data)
       commit('SET_SEARCH_RESULT', charData.data.data)
-      // commit('SET_SEARCH_RESULT', data)
     },
 
     // Поиск по персонажам
@@ -208,12 +211,20 @@ export default {
       return data
     },
 
+    // Запрос статуса обновления инфы
+    async statusUpdateInfo ({ commit }) {
+      const { data } = await apiClient.get('/status-last-update')
+      commit('SET_STATUS_UPDATE_INFO', data.data)
+    },
+
     // Обновление инфы гильды
-    async updateInfo () {
-      console.log('Обновление инфы...')
+    async updateInfo ({ commit }) {
+      const statusUpdate = {
+        status: 'start'
+      }
+      commit('SET_STATUS_UPDATE_INFO', statusUpdate)
       const { data } = await apiClient.post('/load-data')
-      console.log(data)
-      return data
+      commit('SET_STATUS_UPDATE_INFO', data.data)
     }
   },
 

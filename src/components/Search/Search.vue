@@ -17,8 +17,6 @@
   <div class="searchChar" v-for="unit in GET_SELECTED_UNITS" :key="unit.id">
     <label>
       <input type="checkbox" @input="select(unit)" :id="'checkbox_' + unit.id" :checked="checked(unit.id, 'ids')"/>
-      <!-- <input type="checkbox" @input="select(char)" :id="'checkbox_' + char.id" :checked="checked()"/> -->
-      <!-- <input type="checkbox" :id="'checkbox_' + char.id" :checked="checked()"/> -->
       {{ unit.name_ru }}
     </label>
   </div>
@@ -27,9 +25,12 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import clear from '../../mixins/clear.js'
 
 export default {
   name: 'Search',
+
+  mixins: [clear],
 
   computed: {
     ...mapGetters([
@@ -40,7 +41,6 @@ export default {
 
   methods: {
     select (item) {
-      // console.log(item)
       this.$store.commit('SET_SEARCH_UNIT', item)
     },
 
@@ -49,11 +49,7 @@ export default {
     },
 
     clearList () {
-      // const checkedChar = document.querySelectorAll('.checked')
-      // checkedChar.forEach(el => el.classList.remove('checked'))
-      this.$store.commit('SET_SEARCH_RESULT', [])
-      this.$store.commit('SET_SELECTED_UNITS', 'clear')
-      this.$store.commit('SET_SEARCH_UNIT', 'clear')
+      this.clear()
     },
 
     checked (value, param) {
