@@ -1,4 +1,5 @@
 import { apiClient } from '../services/api'
+import moment from 'moment'
 
 export default {
   state: {
@@ -17,7 +18,8 @@ export default {
     selectedSelections: [],
     allCategories: [],
     generalCategories: ['Galactic Legend', 'Leader', 'Healer', 'Attacker', 'Support', 'Tank', 'Capital Ship', 'Cargo Ship', 'Fleet Commander'],
-    preloaderVisibility: false
+    preloaderVisibility: false,
+    lastUpdateInfo: ''
   },
 
   mutations: {
@@ -142,7 +144,7 @@ export default {
     },
 
     SET_STATUS_UPDATE_INFO (state, payload) {
-      // console.log(payload)
+      state.lastUpdateInfo = moment(payload.updated_at).format('DD.MM.YYYY в hh:mm:ss')
       if (payload.status !== 'finish') {
         state.preloaderVisibility = true
       } else {

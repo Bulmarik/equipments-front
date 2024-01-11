@@ -4947,6 +4947,11 @@
   dependencies:
     "minimist" "^1.2.6"
 
+"moment@^2.19.2":
+  "integrity" "sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.30.1.tgz"
+  "version" "2.30.1"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha512-hdrFxZOycD/g6A6SoI2bB5NA/5NEqD0569+S47WZhPvm46sD50ZHdYaFmnua5lndde9rCHGjmfK7Z8BuCt/PcQ=="
   "resolved" "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz"
@@ -8019,6 +8024,13 @@
     "vue-style-loader" "^3.0.0"
     "vue-template-es2015-compiler" "^1.6.0"
 
+"vue-moment@^4.1.0":
+  "integrity" "sha512-Gzisqpg82ItlrUyiD9d0Kfru+JorW2o4mQOH06lEDZNgxci0tv/fua1Hl0bo4DozDV2JK1r52Atn/8QVCu8qQw=="
+  "resolved" "https://registry.npmjs.org/vue-moment/-/vue-moment-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "moment" "^2.19.2"
+
 "vue-router@^3.0.1":
   "integrity" "sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.6.5.tgz"
@@ -8045,7 +8057,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2.0.1", "vue@^2.5.18", "vue@^2.7.14":
+"vue@^2.0.1", "vue@^2.5.18", "vue@^2.7.14", "vue@>=1.x.x":
   "integrity" "sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.7.14.tgz"
   "version" "2.7.14"
