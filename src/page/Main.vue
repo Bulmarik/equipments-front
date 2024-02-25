@@ -28,11 +28,26 @@ export default {
 
   created () {
     this.$store.dispatch('statusUpdateInfo')
+    this.statusCheck()
   },
 
   computed: {
     loading () {
       return this.$store.state.sw.preloaderVisibility
+    }
+  },
+
+  methods: {
+    statusCheck () {
+      this.interval = setInterval(() => {
+        if (this.$store.state.sw.preloaderVisibility) {
+          this.$store.dispatch('statusUpdateInfo')
+          console.log('Проверка')
+        } else {
+          clearInterval(this.interval)
+          console.log('Остановка')
+        }
+      }, 10000)
     }
   }
 }
