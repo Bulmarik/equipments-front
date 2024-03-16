@@ -1,9 +1,7 @@
 <template>
 <div class="page" style="font-size: 40px; color: white">
-  <div>
-    <Header/>
-    <Body/>
-  </div>
+  <Header/>
+  <Body/>
   <Footer/>
   <Preloader v-show="loading"/>
 </div>
