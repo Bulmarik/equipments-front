@@ -85,6 +85,12 @@
   display: flex;
 }
 
+.infoUltimate {
+  width: 15px;
+  margin: 0 10px 0 0;
+  text-align: right;
+}
+
 .infoRelic {
   width: 55px;
   margin: 0;

@@ -28,9 +28,9 @@
         <!-- <h3 class="reportItemName"> {{ item.name_ru }}</h3> -->
         <ul class="reportItemInfo">
           <li class="infoElement" v-for="element in item.info" :key="element.id">
-            <p class="infoUltimate">{{hasUltimate(element.pivot.ultimate)}}</p>
             <p class="infoRelic" v-if="element.pivot.rel !== null">{{ element.pivot.rel + 'р' }}</p>
             <p class="infoRarity" v-else>{{ element.pivot.rarity + '*' }}{{ element.pivot.tir !== 1 ? element.pivot.tir + 'т' : ''}}</p>
+            <p class="infoUltimate">{{hasUltimate(element.pivot.ultimate)}}</p>
             <p class="infoOmic">{{ element.pivot.ability_data.length >= 3 ? 'O' : '' }}</p>
             <p class="infoName">{{ element.name_ru }}</p>
           </li>
