@@ -39,4 +39,4 @@ Vue.mixin({
       document.head.appendChild(script)
     }
   }
-});
+})
