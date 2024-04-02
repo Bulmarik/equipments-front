@@ -17,7 +17,7 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
+/* eslint-disable */
 Vue.mixin({
   mounted() {
   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}
@@ -33,3 +33,4 @@ Vue.mixin({
      })
   }
 })
+/* eslint-enable */
