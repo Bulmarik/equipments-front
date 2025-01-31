@@ -34,7 +34,7 @@
             <!-- Временно отключен -->
             <!-- <p class="infoOmic">{{ element.pivot.ability_data.length >= 3 ? 'O' : '' }}</p> -->
             <p class="infoName">{{ element.name_ru }}</p>
-          </li>
+          </li>штащ
         </ul>
       </li>
     </ul>
