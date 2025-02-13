@@ -91,11 +91,12 @@ export default {
 
   computed: {
     filteredItems () {
-      if (this.GET_ALL_UNITS) {
+      if (this.GET_ALL_UNITS.length > 0) {
         return this.GET_ALL_UNITS.filter(item => {
           return item.name_ru && item.name_ru.toLowerCase().includes(this.searchQuery.toLowerCase())
         })
       }
+      return this.GET_ALL_UNITS.length
     },
     ...mapGetters([
       'GET_ALL_UNITS',
