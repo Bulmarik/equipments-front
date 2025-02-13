@@ -13,8 +13,13 @@
     </div>
     <div class="charListContent">
       <h2 class="charListTitle">Персонажи</h2>
+      <input
+        type="text"
+        v-model="searchQuery"
+        placeholder="Поиск..."
+      />
       <div class="charListGrid">
-        <div class="charListItem" :class="checked(char)" v-for="char in GET_ALL_UNITS" :key="char.id" :id="char.id" v-if="char.type === 'char'" @click="setSelectedChar(char)">
+        <div class="charListItem" :class="checked(char)" v-for="char in filteredItems" :key="char.id" :id="char.id" v-if="char.type === 'char'" @click="setSelectedChar(char)">
             <label class="charListItemLabel">
               <img class="charListItemIcon" :src="char.image" alt="иконка перса">
               <div class="charListItemLabelBox">
@@ -25,7 +30,7 @@
       </div>
       <h2 class="charListTitle">Корабли</h2>
       <div class="charListGrid">
-        <div class="charListItem" :class="checked(char)" v-for="char in GET_ALL_UNITS" :key="char.id" :id="char.id" v-if="char.type === 'ship'" @click="setSelectedChar(char)">
+        <div class="charListItem" :class="checked(char)" v-for="char in filteredItems" :key="char.id" :id="char.id" v-if="char.type === 'ship'" @click="setSelectedChar(char)">
           <label class="charListItemLabel">
             <img class="charListItemIcon" :src="char.image" alt="иконка корабля">
             <div class="charListItemLabelBox">
@@ -75,7 +80,8 @@ export default {
   data () {
     return {
       groupName: '',
-      fraction: []
+      fraction: [],
+      searchQuery: ''
     }
   },
 
@@ -84,6 +90,13 @@ export default {
   },
 
   computed: {
+    filteredItems () {
+      if (this.GET_ALL_UNITS) {
+        return this.GET_ALL_UNITS.filter(item => {
+          return item.name_ru && item.name_ru.toLowerCase().includes(this.searchQuery.toLowerCase())
+        })
+      }
+    },
     ...mapGetters([
       'GET_ALL_UNITS',
       'GET_SELECTED_UNITS',
