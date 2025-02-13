@@ -96,7 +96,7 @@ export default {
           return item.name_ru && item.name_ru.toLowerCase().includes(this.searchQuery.toLowerCase())
         })
       }
-      return this.GET_ALL_UNITS.length
+      return this.GET_ALL_UNITS
     },
     ...mapGetters([
       'GET_ALL_UNITS',
