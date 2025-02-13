@@ -28,13 +28,14 @@
         <!-- <h3 class="reportItemName"> {{ item.name_ru }}</h3> -->
         <ul class="reportItemInfo">
           <li class="infoElement" v-for="element in item.info" :key="element.id">
-            <p class="infoRelic" v-if="element.pivot.rel !== null">{{ element.pivot.rel + 'р' }}</p>
-            <p class="infoRarity" v-else>{{ element.pivot.rarity + '*' }}{{ element.pivot.tir !== 1 ? element.pivot.tir + 'т' : ''}}</p>
-            <p class="infoUltimate">{{hasUltimate(element.pivot.ultimate)}}</p>
-            <!-- Временно отключен -->
-            <!-- <p class="infoOmic">{{ element.pivot.ability_data.length >= 3 ? 'O' : '' }}</p> -->
+            <p class="infoRelic" v-if="element.rel !== null">{{ element.rel + 'р' }}</p>
+            <p class="infoRarity" v-else>{{ element.rarity + '*' }}{{ element.tir !== 1 ? element.tir + 'т' : ''}}</p>
+            <p class="infoUltimate">{{hasUltimate(element.ultimate)}}</p>
             <p class="infoName">{{ element.name_ru }}</p>
-          </li>штащ
+            <div class="infoOmics" v-for="ability in element.ability_data"  v-if="ability.isOmicronTier" :key="ability.id">
+              <img class="infoOmicIcon" :src=ability.image alt="Омик">
+            </div>
+          </li>
         </ul>
       </li>
     </ul>

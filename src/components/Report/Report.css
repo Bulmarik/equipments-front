@@ -64,7 +64,7 @@
 }
 
 .reportItemName {
-  width: 40%;
+  width: 35%;
   font-size: 20px;
   font-weight: normal;
   text-align: start;
@@ -72,7 +72,7 @@
 }
 
 .reportItemInfo {
-  width: 60%;
+  width: 65%;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -83,6 +83,20 @@
 .infoElement {
   width: 100%;
   display: flex;
+  align-items: center;
+}
+
+.infoRelic {
+  width: 55px;
+  margin: 0;
+  text-align: right;
+}
+
+.infoRarity {
+  width: 55px;
+  margin: 0;
+  color: rgb(106, 103, 103);
+  text-align: right;
 }
 
 .infoUltimate {
@@ -91,27 +105,24 @@
   text-align: right;
 }
 
-.infoRelic {
-  width: 55px;
-  margin: 0;
-  /* margin: 0 5px 0 0; */
-  text-align: right;
+.infoName {
+  width: 300px;
 }
 
-.infoRarity {
-  width: 55px;
-  margin: 0;
-  /* margin: 0 5px 0 0; */
-  color: rgb(106, 103, 103);
-  text-align: right;
+.infoOmics {
+  display: flex;
+  width: 25px;
+  height: 25px;
+  margin: 0 1px 0 0;
+  padding: 0;
 }
 
-.infoOmic {
-  width: 15px;
-  margin: 0 10px 0 0;
-  text-align: right;
+.infoOmicIcon {
+  margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .infoName {
-  margin: 0;
+  margin: 0 5px 0 0;
 }
