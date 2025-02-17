@@ -3,21 +3,21 @@
     <div class="charListButtons">
       <button class="charListBtn charListBtnReset" @click="clearList">Сброс</button>
       <button class="charListBtn charlistBtnFrations">Фракции</button>
-      <button class="charListBtn charListBtnCreateSelection" @click="openInput">Создать подборку</button>
+      <button class="charListBtn charListBtnCreateSelection" @click="openInput">Создать отряд</button>
       <router-link :to="{ name: 'SelectionList' }">
-          <button class="charListBtn charListBtnSelections">Подборки</button>
+        <button class="charListBtn charListBtnSelections">Отряды</button>
       </router-link>
       <router-link :to="{ name: 'Main' }">
         <button class="charListBtn charListBtnOk">Ок</button>
       </router-link>
     </div>
     <div class="charListContent">
-      <h2 class="charListTitle">Персонажи</h2>
       <input
         type="text"
         v-model="searchQuery"
         placeholder="Поиск..."
       />
+      <h2 class="charListTitle">Персонажи</h2>
       <div class="charListGrid">
         <div class="charListItem" :class="checked(char)" v-for="char in filteredItems" :key="char.id" :id="char.id" v-if="char.type === 'char'" @click="setSelectedChar(char)">
             <label class="charListItemLabel">
@@ -44,7 +44,7 @@
       <div class="charListCreateOverlay"></div>
       <form class="charListCreateContainer">
         <button class="charListBtn charListBtnCancel" @click.prevent="closeInput()">Отмена</button>
-        <input class="charListInput" v-model="groupName" type="text" placeholder="Введите название группы">
+        <input class="charListInput" v-model="groupName" type="text" placeholder="Введите название отряда">
         <button class="charListBtn charListBtnSave" @click.prevent="saveSelection">Сохранить</button>
       </form>
     </div>
