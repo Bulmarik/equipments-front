@@ -17,6 +17,7 @@
         </label>
       </div>
     </div>
+    <!-- {{ GET_SEARCH_RESULT }} -->
     <ul class="reportList">
       <h4 class="reportItemTitle">{{ addTitleText }}</h4>
       <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="(item.external_id.length !== 36 || (item.info && item.info.length < lengthLimit)) && (item.info && item.info.length >= searchUnitsLength)">
@@ -64,7 +65,7 @@ export default {
         titleText = 'Ничего не найдено'
       } else {
         if (this.GET_SEARCH_RESULT.find(item => item.external_id.length === 36)) {
-          titleText = `Найдено у ${this.coincidenceCounter()} игроков`
+          titleText = this.coincidenceCounter() > 0 ? `Найдено у ${this.coincidenceCounter()} игроков` : 'Ничего не найдено'
         } else {
           titleText = ''
         }
