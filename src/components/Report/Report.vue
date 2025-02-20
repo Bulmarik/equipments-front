@@ -58,17 +58,16 @@ export default {
       'GET_SEARCH_RESULT'
     ]),
 
-    // уточнить, как лучше задать переменную
     addTitleText () {
       let titleText
-      if (this.GET_SEARCH_RESULT.length === 0) {
+      if (this.GET_SEARCH_RESULT.find(item => item.external_id.length !== 36)) {
+        titleText = ''
+      } else if (this.GET_SEARCH_RESULT.length === 0 || this.coincidenceCounter() === 0) {
         titleText = 'Ничего не найдено'
+      } else if (this.coincidenceCounter() % 10 === 1) {
+        titleText = `Найдено у ${this.coincidenceCounter()} игрока`
       } else {
-        if (this.GET_SEARCH_RESULT.find(item => item.external_id.length === 36)) {
-          titleText = this.coincidenceCounter() > 0 ? `Найдено у ${this.coincidenceCounter()} игроков` : 'Ничего не найдено'
-        } else {
-          titleText = ''
-        }
+        titleText = `Найдено у ${this.coincidenceCounter()} игроков`
       }
       return titleText
     }
