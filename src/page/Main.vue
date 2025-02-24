@@ -39,11 +39,11 @@ export default {
     statusCheck () {
       this.interval = setInterval(() => {
         if (this.$store.state.sw.preloaderVisibility) {
-          this.$store.dispatch('statusUpdateInfo')
           console.log('Проверка')
+          this.$store.dispatch('statusUpdateInfo')
         } else {
-          clearInterval(this.interval)
           console.log('Остановка')
+          clearInterval(this.interval)
         }
       }, 10000)
     }
