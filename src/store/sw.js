@@ -1,4 +1,4 @@
-import { apiClient } from '../services/api'
+import {apiClient} from '../services/api'
 import moment from 'moment'
 
 export default {
@@ -235,11 +235,10 @@ export default {
       return state.selectedUnits
     },
     GET_SEARCH_UNITS (state) {
-      const searchUnits = {
+      return {
         ids: [...state.searchChar.ids, ...state.searchShip.ids],
         rel: state.searchChar.rel
       }
-      return searchUnits
     },
     GET_SEARCH_RESULT (state) {
       return state.searchResult
