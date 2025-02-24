@@ -7,7 +7,7 @@ export default {
     selectedUnits: [],
     searchChar: {
       ids: [],
-      rel: null
+      rel: 0
     },
     searchShip: {
       ids: [],
@@ -168,16 +168,17 @@ export default {
 
     // Поиск по игрокам
     async searchByMembers ({ commit, state }) {
-      let charParam = JSON.stringify(state.searchChar)
-      let shipParam = JSON.stringify(state.searchShip)
-      const charData = await apiClient.post('/search-data', charParam)
-      const shipData = await apiClient.post('/search-data', shipParam)
-      charData.data.data.forEach(item => {
-        const elem = shipData.data.data.find(el => el.name === item.name)
-        if (elem) {
-          item.info = item.info.concat(elem.info)
-        }
-      })
+      let charParam = state.searchChar
+      let shipParam = state.searchShip
+
+      const mergedArray = charParam.ids.concat(shipParam.ids)
+
+      const mergedParams = {
+        ids: mergedArray,
+        rel: charParam.rel
+      }
+      const charData = await apiClient.post('/search-data', mergedParams)
+
       commit('SET_SEARCH_RESULT', charData.data.data)
     },
 

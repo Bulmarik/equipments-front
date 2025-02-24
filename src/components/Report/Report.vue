@@ -4,7 +4,12 @@
       <div class="btnWrapper">
         <button class="searchBtn" @click.prevent="search('searchByMembers')">Поиск по игрокам</button>
         <label class="checkboxLabel">
-          <input type="checkbox" class="fullСoincidenceCheckbox" v-model="searchUnitsLength" v-bind:true-value=GET_SEARCH_UNITS.ids.length v-bind:false-value="0">
+          <input
+            type="checkbox"
+            class="fullСoincidenceCheckbox"
+            v-model="searchUnitsLength"
+            v-bind:true-value=GET_SEARCH_UNITS.ids.length
+            v-bind:false-value="0">
           только полные совпадения
         </label>
       </div>
