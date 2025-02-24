@@ -145,11 +145,7 @@ export default {
 
     SET_STATUS_UPDATE_INFO (state, payload) {
       state.lastUpdateInfo = moment(payload.updated_at).format('DD.MM.YYYY в hh:mm:ss')
-      if (payload.status === 'start') {
-        state.preloaderVisibility = true
-      } else {
-        state.preloaderVisibility = false
-      }
+      state.preloaderVisibility = payload.status === 'start'
     }
   },
 
