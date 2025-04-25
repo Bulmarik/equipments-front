@@ -6,6 +6,7 @@
         <label class="checkboxLabel">
           <input type="checkbox" class="coincidenceCheckbox" v-model="searchUnitsLength" v-bind:true-value=GET_SEARCH_UNITS.ids.length v-bind:false-value="0">
           только полные совпадения
+          <!-- Добавить "только не соответствие" -->
         </label>
       </div>
       <h2 class="title reportTitle">Отчет</h2>
@@ -20,8 +21,9 @@
     <!-- {{ GET_SEARCH_RESULT }} -->
     <ul class="reportList">
       <h4 class="reportItemTitle">{{ addTitleText }}</h4>
-      <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="(item.external_id.length !== 36 || (item.info && item.info.length < lengthLimit)) && (item.info && item.info.length >= searchUnitsLength)">
-        <h3 class="reportItemName"> {{ item.name_ru }} {{ item.external_id.length !== 36 && item.info.length > 1 ? `[${item.info.length}]` : ''}}</h3>
+      <!-- <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="(item.external_id.length !== 36 || (item.info && item.info.length < lengthLimit)) && (item.info && item.info.length >= searchUnitsLength)"> -->
+      <li class="reportItem" v-for="item in GET_SEARCH_RESULT" :key="item.id" v-if="(!isChar(item) && fullCoincidence (item)) || (isChar(item) && limitSet(item))">
+        <h3 class="reportItemName"> {{ item.name_ru }} {{ isChar(item) && item.info.length > 1 ? `[${item.info.length}]` : ''}}</h3>
         <ul class="reportItemInfo">
           <li class="infoElement" v-for="element in item.info" :key="element.id">
             <p class="infoRelic" v-if="element.rel !== null">{{ element.rel + 'р' }}</p>
@@ -93,6 +95,18 @@ export default {
         }
       })
       return value
+    },
+
+    isChar (item) {
+      return item.external_id.length !== 36
+    },
+
+    fullCoincidence (item) {
+      return item.info && item.info.length >= this.searchUnitsLength
+    },
+
+    limitSet (item) {
+      return item.info && item.info.length < this.lengthLimit
     }
 
     // addTitleText () {
