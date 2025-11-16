@@ -106,7 +106,7 @@ export default {
     },
 
     limitSet (item) {
-      return item.info && item.info.length < this.lengthLimit
+      return item.info && item.info.length <= this.lengthLimit
     }
 
     // addTitleText () {
