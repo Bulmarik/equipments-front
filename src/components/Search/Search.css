@@ -16,6 +16,7 @@
   justify-content: space-between;
   width: 100%;
   margin: 0 auto;
+  padding: 4px 0px;
   border-top: 1px solid rgb(153, 150, 150);
   border-bottom: 1px solid rgb(153, 150, 150);
   font-size: 20px;
@@ -23,6 +24,12 @@
 
 .searchRelDesc {
   margin: 0;
+}
+
+.searchRelRadio {
+  border-left: 1px solid rgb(153, 150, 150);
+  margin-left: 3px;
+  padding-left: 5px;
 }
 
 .searchListButtons {

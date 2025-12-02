@@ -3,7 +3,7 @@
   <h2 class="title searchTitle">Запрос</h2>
   <div class="searchRel">
     <p class="searchRelDesc">наименьший уровень реликтов</p>
-    <div v-for="rel in 10" :key="rel">
+    <div class="searchRelRadio" v-for="rel in 11" :key="rel">
       <input type="radio" @input="selectRel" :id="rel" name="rel" :value="rel - 1" :checked="checked(rel - 1, 'rel')"/>
       <label :for="rel">{{rel - 1}}</label>
     </div>
